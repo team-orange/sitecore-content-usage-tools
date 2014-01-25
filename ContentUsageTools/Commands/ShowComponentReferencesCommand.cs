@@ -58,7 +58,7 @@ namespace ContentUsageTools.Commands
             }
 
             string[] urls = references.Select(item => String.Format("{0}|{1}", item.Paths.ContentPath, ContentUsageToolsHelper.GetResolvedPageUrl(item))).ToArray();
-            SheerResponse.Eval(string.Format("parent.showComponentReferences('{0}', '{1}')", datasourceItem.ID, String.Join(",", urls)));
+            SheerResponse.Eval(String.Format("parent.showComponentReferences('{0}', '{1}')", datasourceItem.ID, String.Join(",", urls)));
         }
 
         private static Item GetPageItem()
