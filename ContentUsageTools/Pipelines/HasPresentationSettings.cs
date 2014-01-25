@@ -6,11 +6,17 @@ using Sitecore.Pipelines;
 
 namespace ContentUsageTools.Pipelines
 {
+    /// <summary>
+    /// Check to see if the current item has presentation settings
+    /// </summary>
     public class HasPresentationSettings
     {
-        public virtual void Process(PipelineArgs args)
+        public virtual void Process(DetermineIfPagePipelineArgs args)
         {
-            // TODO: implement checking to see if the current item has presentation settings
+            if (args.Item != null)
+            {
+                args.IsPage = args.Item.Visualization.Layout != null;
+            }
         }
 
     }
