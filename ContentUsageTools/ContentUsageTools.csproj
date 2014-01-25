@@ -39,6 +39,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Sitecore.Client">
+      <HintPath>..\Binaries\Sitecore.Client.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Kernel">
       <HintPath>..\Binaries\Sitecore.Kernel.dll</HintPath>
     </Reference>
@@ -60,6 +63,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\ShowComponentReferencesCommand.cs" />
     <Compile Include="Helpers\ContentUsageToolsHelper.cs" />
     <Compile Include="Pipelines\ContentEditorContentUsageMessage.cs" />
     <Content Include="layouts\Orange\ComponentControl.ascx" />
