@@ -37,7 +37,7 @@ namespace ContentUsageTools.Commands
                 List<string> urls = new List<string>();
                 references.ToList().ForEach(item => urls.Add(LinkManager.GetItemUrl(item)));
 
-                SheerResponse.Eval("showComponentReferences('" + urls.ToArray() + "')");  
+                SheerResponse.Eval("parent.showComponentReferences('" + urls.ToArray() + "')");  
             }
         }
     }
