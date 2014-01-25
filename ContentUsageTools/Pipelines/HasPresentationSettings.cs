@@ -28,7 +28,7 @@ namespace ContentUsageTools.Pipelines
         /// <param name="args">The arguments.</param>
         public virtual void Process(DetermineIfPagePipelineArgs args)
         {
-            Assert.IsNotNull(args, "args");
+            Assert.ArgumentNotNull(args, "args");
 
             if (args.Item != null)
             {

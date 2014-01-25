@@ -48,7 +48,7 @@ namespace ContentUsageTools.Helpers
         /// <returns>The linked items.</returns>
         public static IEnumerable<Item> GetLinkedItemsInContentAndMediaLibrary(Item item)
         {
-            Assert.IsNotNull(item, "item");
+            Assert.ArgumentNotNull(item, "item");
 
             ItemLink[] links = Globals.LinkDatabase.GetReferrers(item);
             List<Item> referenceItemList = new List<Item>();

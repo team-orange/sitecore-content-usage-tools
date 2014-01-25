@@ -30,7 +30,7 @@ namespace ContentUsageTools.Pipelines
     {
         public void Process(GetContentEditorWarningsArgs args)
         {
-            Assert.IsNotNull(args, "args");
+            Assert.ArgumentNotNull(args, "args");
 
             if (args.Item == null || ContentUsageToolsHelper.IsPage(args.Item) || args.Item.Fields.All(f => f.Name.StartsWith("_"))) 
             {
