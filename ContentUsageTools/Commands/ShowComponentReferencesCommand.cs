@@ -3,6 +3,7 @@ using Sitecore.Diagnostics;
 using Sitecore.Links;
 using Sitecore.Shell.Applications.WebEdit.Commands;
 using Sitecore.Shell.Framework.Commands;
+using Sitecore.Web.UI.Sheer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,10 @@ namespace ContentUsageTools.Commands
 
             if(references != null && references.Any())
             {
+                List<string> urls = new List<string>();
+                references.ToList().ForEach(link => urls.Add(LinkManager.GetItemUrl(link.GetSourceItem(), UrlOptions.DefaultOptions)));
 
+                SheerResponse.Eval("showComponentReferences('" + urls.ToArray() + "')");  
             }
         }
     }
