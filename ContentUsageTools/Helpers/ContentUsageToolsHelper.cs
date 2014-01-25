@@ -86,6 +86,11 @@ namespace ContentUsageTools.Helpers
             return (item.Paths.IsMediaItem || item.Paths.IsContentItem);
         }
 
+        /// <summary>
+        /// Check if the item is in the core database
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public static bool IsInCoreDatabase(Item item)
         {
             return item.Database.Equals(Factory.GetDatabase("core"));
