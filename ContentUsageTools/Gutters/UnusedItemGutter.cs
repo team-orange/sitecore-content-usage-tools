@@ -27,7 +27,8 @@ namespace ContentUsageTools.Gutters
                 descriptor = new GutterIconDescriptor
                 {
                     Icon = "Control/32x32/bar_hor_d.png",
-                    Tooltip = Translate.Text("This item is unused, you can probably delete it")
+                    Tooltip = Translate.Text("This item is not being used, click to delete it"),
+                    Click = string.Format("item:delete(id={0})", item.ID)
                 };
             }
 
