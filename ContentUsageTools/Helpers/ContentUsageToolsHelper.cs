@@ -38,7 +38,7 @@ namespace ContentUsageTools.Helpers
         /// <summary>
         /// These websites should not be used when resolving what website an item belongs to.
         /// </summary>
-        private readonly static string[] ExcludeSites = new[] { "shell", "modules_shell", "modules_website" };
+        private readonly static string[] ExcludeSites = new[] { "shell", "modules_shell", "modules_website", "login","admin","service" };
 
         /// <summary>
         /// Return a list of item which is linked to the item in parameters and exclude all the item 
@@ -72,7 +72,7 @@ namespace ContentUsageTools.Helpers
         {
             DetermineIfPagePipelineArgs args = new DetermineIfPagePipelineArgs(item);
             CorePipeline.Run("contentusagetools.determineifpage", args);
-            
+
             return args.IsPage;
         }
 
@@ -138,7 +138,7 @@ namespace ContentUsageTools.Helpers
 
                     string startItem1 = info.RootPath + info.StartItem;
                     Item item = Context.ContentDatabase.GetItem(startItem1);
-                    
+
                     if (item == null)
                     {
                         return false;
@@ -158,8 +158,14 @@ namespace ContentUsageTools.Helpers
             ItemLink[] links = Globals.LinkDatabase.GetReferrers(item);
             StringBuilder sb = new StringBuilder();
 
-            links.ForEach(it => sb.AppendFormat("{0}|", it.SourceItemID));
-            
+            foreach (var itemLink in links)
+            {
+                if (!sb.ToString().Contains(itemLink.SourceItemID.ToString()))
+                {
+                    sb.AppendFormat("{0}|", itemLink.SourceItemID);
+                }
+            }
+
             if (sb.Length > 0)
             {
                 sb.Remove(sb.Length - 1, 1);
