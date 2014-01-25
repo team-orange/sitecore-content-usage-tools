@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using ContentUsageTools.Pipelines;
+using Sitecore;
+using Sitecore.Configuration;
 using Sitecore.Data.Items;
+using Sitecore.Links;
 using Sitecore.Pipelines;
 
 namespace ContentUsageTools.Helpers
@@ -17,7 +20,13 @@ namespace ContentUsageTools.Helpers
         /// <returns></returns>
         public static IEnumerable<Item> GetLinkedItems(Item item)
         {
-            return null;
+            var links = Globals.LinkDatabase.GetReferrers(item);
+            var referenceItemList = new List<Item>();
+            referenceItemList.AddRange(
+                links.Select(itemLink => Factory.GetDatabase("master").GetItem(itemLink.SourceItemID)));
+
+           
+            return referenceItemList;
         }
 
         /// <summary>
@@ -42,8 +51,7 @@ namespace ContentUsageTools.Helpers
         /// <returns></returns>
         public static bool IsUnused(Item item)
         {
-            // TODO : Call the LinkedItem check if it's empty
-            return true;
+            return !GetLinkedItems(item).Any();
         }
 
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using ContentUsageTools.Helpers;
 using Sitecore.Data.Items;
+using Sitecore.Shell.Applications.ContentEditor;
 using Sitecore.Shell.Applications.ContentEditor.Gutters;
 
 namespace ContentUsageTools.Gutters
@@ -20,8 +21,16 @@ namespace ContentUsageTools.Gutters
         /// <returns></returns>
         protected override GutterIconDescriptor GetIconDescriptor(Item item)
         {
-            if(ContentUsageToolsHelper
-
+            if(!ContentUsageToolsHelper.IsPage(item))
+            {
+                if (ContentUsageToolsHelper.IsUnused(item))
+                {
+                    GutterIconDescriptor descriptor = new GutterIconDescriptor();
+                    descriptor.Icon = "Control/32x32/bar_hor_d.png"; //Remove the Hardcodede Path - Settings 
+                    descriptor.Tooltip = "This item is unused, you can probably delete it"; //Translation 
+                    return descriptor;
+                }
+            }
             return null;
         }
     }
