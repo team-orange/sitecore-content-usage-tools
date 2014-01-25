@@ -60,12 +60,18 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pipelines\ContentEditorContentUsageMessage.cs" />
-    <Compile Include="Pipelines\HasPresentationSettings.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="layouts\Orange\ComponentControl.ascx" />
+    <Content Include="layouts\Sample layout.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Config\Include\ContentUsageTools.config" />
+    <Compile Include="layouts\Orange\ComponentControl.ascx.cs">
+      <DependentUpon>ComponentControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="layouts\Orange\ComponentControl.ascx.designer.cs">
+      <DependentUpon>ComponentControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -92,10 +98,6 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
