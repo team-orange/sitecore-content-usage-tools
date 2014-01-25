@@ -1,178 +1,246 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.UI.WebControls;
-using ContentUsageTools.Helpers;
-using Sitecore.ContentSearch;
-using Sitecore.ContentSearch.SearchTypes;
-using Sitecore.Data.Items;
-using Sitecore.Globalization;
-using Sitecore.Diagnostics;
+﻿/* Copyright (C) 2014 Dražen Janjiček, Johann Baziret, Robin Hermanussen
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see http://www.gnu.org/licenses/. */
 
 namespace ContentUsageTools.Reports
 {
-    public partial class ContentUsageReport : System.Web.UI.Page
-    {
+    using ContentUsageTools.Helpers;
+    using Sitecore.ContentSearch;
+    using Sitecore.ContentSearch.SearchTypes;
+    using Sitecore.Data.Items;
+    using Sitecore.Diagnostics;
+    using Sitecore.Globalization;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.UI;
+    using System.Web.UI.WebControls;
 
+    /// <summary>
+    /// Renders a report about the usage of items.
+    /// </summary>
+    public partial class ContentUsageReport : Page
+    {
+        private List<ReportItem> referredItemsReportItems;
+        private List<ReportItem> unusedReportItems;
+        private IEnumerable<Item> reportItems;
+
+        /// <summary>
+        /// Provides information about the specific report item.
+        /// </summary>
         public class ReportItem
         {
+            private List<Item> referredItems;
+
+            /// <summary>
+            /// Gets or sets the item.
+            /// </summary>
             private Item Item { get; set; }
 
-            public ReportItem(Item item, bool searchWithIndex)
-            {
-                Item = item;
-                SearchWithIndex = searchWithIndex;
-            }
-
+            /// <summary>
+            /// Gets or sets a value indicating whether [search with index].
+            /// </summary>
+            /// <value>
+            ///   <c>true</c> if [search with index]; otherwise, <c>false</c>.
+            /// </value>
             public bool SearchWithIndex { get; set; }
 
+            /// <summary>
+            /// Gets the display name.
+            /// </summary>
             public string DisplayName
             {
-                get { return Item.DisplayName; }
+                get { return this.Item.DisplayName; }
             }
 
+            /// <summary>
+            /// Gets the path.
+            /// </summary>
             public string Path
             {
-                get { return Item.Paths.ContentPath; }
+                get { return this.Item.Paths.ContentPath; }
             }
 
-            private List<Item> referredItems;
+            /// <summary>
+            /// Gets the referred items.
+            /// </summary>
             public List<Item> ReferredItems
             {
                 get
                 {
-                    if (SearchWithIndex)
+                    if (this.SearchWithIndex)
                     {
-                        referredItems = new List<Item>();
+                        this.referredItems = new List<Item>();
+
                         using (IProviderSearchContext context = ContentSearchManager.GetIndex("sitecore_master_index").CreateSearchContext())
                         {
-                            foreach (SearchResultItem source in context.GetQueryable<SearchResultItem>().Where(x => x.Paths.Contains(Item.ID)))
+                            foreach (SearchResultItem source in context.GetQueryable<SearchResultItem>().Where(x => x.Paths.Contains(this.Item.ID)))
                             {
-                                foreach (var linkedItem in source["LinkedItems"].Split('|').Where(x => !string.IsNullOrEmpty(x)))
+                                foreach (string linkedItem in source["LinkedItems"].Split('|').Where(x => !String.IsNullOrEmpty(x)))
                                 {
-                                    var item = Sitecore.Context.ContentDatabase.GetItem(linkedItem);
+                                    Item item = Sitecore.Context.ContentDatabase.GetItem(linkedItem);
+
                                     if (ContentUsageToolsHelper.IsPage(item))
                                     {
-                                        referredItems.Add(item);
+                                        this.referredItems.Add(item);
                                     }
                                 }
                             }
                         }
 
-
-                        return referredItems;
+                        return this.referredItems;
                     }
-                    return referredItems ?? (referredItems = ContentUsageToolsHelper.GetLinkedItemsInContentAndMediaLibrary(Item).ToList());
+
+                    return this.referredItems ?? (this.referredItems = ContentUsageToolsHelper.GetLinkedItemsInContentAndMediaLibrary(this.Item).ToList());
                 }
             }
 
+            /// <summary>
+            /// Initializes a new instance of the <see cref="ReportItem"/> class.
+            /// </summary>
+            /// <param name="item">The item.</param>
+            /// <param name="searchWithIndex">if set to <c>true</c> [search with index].</param>
+            public ReportItem(Item item, bool searchWithIndex)
+            {
+                this.Item = item;
+                this.SearchWithIndex = searchWithIndex;
+            }
         }
 
-        private List<ReportItem> referredItemsReportItems;
+        /// <summary>
+        /// Gets the referred items report items.
+        /// </summary>
         public List<ReportItem> ReferredItemsReportItems
         {
             get
             {
-
-
-
-                return referredItemsReportItems ??
-                       (referredItemsReportItems = ReportItems.Where(item => !ContentUsageToolsHelper.IsUnused(item))
-                                                              .Select(item => new ReportItem(item, UseIndex.Checked))
-                                                              .Where(item => item.ReferredItems.Any())
-                                                              .ToList());
+                return this.referredItemsReportItems ??
+                       (this.referredItemsReportItems = this.ReportItems.Where(item => !ContentUsageToolsHelper.IsUnused(item))
+                                                                        .Select(item => new ReportItem(item, UseIndex.Checked))
+                                                                        .Where(item => item.ReferredItems.Any())
+                                                                        .ToList());
             }
         }
 
-        private List<ReportItem> unusedReportItems;
+        /// <summary>
+        /// Gets the unused report items.
+        /// </summary>
         public List<ReportItem> UnusedReportItems
         {
             get
             {
-                return unusedReportItems ??
-                       (unusedReportItems = ReportItems.Where(item => ContentUsageToolsHelper.IsUnused(item))
-                                                              .Select(item => new ReportItem(item, UseIndex.Checked))
-                                                              .ToList());
+                return this.unusedReportItems ??
+                       (this.unusedReportItems = this.ReportItems.Where(item => ContentUsageToolsHelper.IsUnused(item))
+                                                                 .Select(item => new ReportItem(item, UseIndex.Checked))
+                                                                 .ToList());
             }
         }
 
-        private IEnumerable<Item> reportItems;
         private IEnumerable<Item> ReportItems
         {
             get
             {
-                if (reportItems == null)
+                if (this.reportItems == null)
                 {
-                    Item root = RootItem;
-                    reportItems = root.Axes.GetDescendants()
-                               .Where(item => !ContentUsageToolsHelper.IsPage(item));
+                    Item root = this.RootItem;
+                    this.reportItems = root.Axes.GetDescendants().Where(item => !ContentUsageToolsHelper.IsPage(item));
                 }
-                return reportItems;
+
+                return this.reportItems;
             }
         }
 
         private Item RootItem
         {
-            get { return Sitecore.Context.ContentDatabase.GetItem(PathTextBox.Text); }
+            get { return Sitecore.Context.ContentDatabase.GetItem(this.PathTextBox.Text); }
         }
 
+        /// <summary>
+        /// Handles the Load event of the Page control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            Title.Text = Translate.Text("Content Usage Report");
-            UnusedReport.Text = Translate.Text("Unused Report");
-            UsedMultipleTimesReport.Text = Translate.Text("Referred items report");
-            PathLabel.Text = Translate.Text("Item start path");
-            GenerateReport.Text = Translate.Text("Generate report");
-            CvTypeOfReport.Text = Translate.Text("You must choose at least one of the reports");
-            if (!Page.IsPostBack)
+            this.Title.Text = Translate.Text("Content Usage Report");
+            this.UnusedReport.Text = Translate.Text("Unused Report");
+            this.UsedMultipleTimesReport.Text = Translate.Text("Referred items report");
+            this.PathLabel.Text = Translate.Text("Item start path");
+            this.GenerateReport.Text = Translate.Text("Generate report");
+            this.CvTypeOfReport.Text = Translate.Text("You must choose at least one of the reports");
+
+            if (!this.Page.IsPostBack)
             {
-                UseIndex.Checked = true;
-                UnusedReport.Checked = true;
-                RequiredPath.Text = Translate.Text("Please enter a valid path within Sitecore to start from");
+                this.UseIndex.Checked = true;
+                this.UnusedReport.Checked = true;
+                this.RequiredPath.Text = Translate.Text("Please enter a valid path within Sitecore to start from");
             }
         }
 
+        /// <summary>
+        /// Handles the OnClick event of the GenerateReport control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void GenerateReport_OnClick(object sender, EventArgs e)
         {
-            ErrorLabel.Text = "";
-            Page.Validate();
-            if (Page.IsValid && RootItem != null)
+            this.ErrorLabel.Text = "";
+            this.Page.Validate();
+
+            if (this.Page.IsValid && this.RootItem != null)
             {
                 try
                 {
-                    rptResultsUnusedReport.Visible = rptResultsReferredItemsReport.Visible = false;
-                    if (UnusedReport.Checked)
+                    this.rptResultsUnusedReport.Visible = this.rptResultsReferredItemsReport.Visible = false;
+
+                    if (this.UnusedReport.Checked)
                     {
-                        rptResultsUnusedReport.Visible = true;
-                        rptResultsUnusedReport.DataSource = UnusedReportItems;
-                        rptResultsUnusedReport.DataBind();
+                        this.rptResultsUnusedReport.Visible = true;
+                        this.rptResultsUnusedReport.DataSource = this.UnusedReportItems;
+                        this.rptResultsUnusedReport.DataBind();
                     }
-                    if (UsedMultipleTimesReport.Checked)
+
+                    if (this.UsedMultipleTimesReport.Checked)
                     {
-                        rptResultsReferredItemsReport.Visible = true;
-                        rptResultsReferredItemsReport.DataSource = ReferredItemsReportItems;
-                        rptResultsReferredItemsReport.DataBind();
+                        this.rptResultsReferredItemsReport.Visible = true;
+                        this.rptResultsReferredItemsReport.DataSource = this.ReferredItemsReportItems;
+                        this.rptResultsReferredItemsReport.DataBind();
                     }
                 }
                 catch (KeyNotFoundException keyNotFoundExc)
                 {
                     string message = "An exception occurred during generating the report; this may be due to the index not being up to date. Try the \"Normal report\" or rebuild the search index.";
                     Log.Error(message, keyNotFoundExc, this);
-                    ErrorLabel.Text = Translate.Text(message);
+                    this.ErrorLabel.Text = Translate.Text(message);
                 }
                 catch (Exception exc)
                 {
                     string message = Translate.Text("An exception occurred during generating the report. The error has been logged.");
                     Log.Error(message, exc, this);
-                    ErrorLabel.Text = Translate.Text(message);
+                    this.ErrorLabel.Text = Translate.Text(message);
                 }
             }
         }
 
+        /// <summary>
+        /// Validates the type of report.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="args">The <see cref="ServerValidateEventArgs"/> instance containing the event data.</param>
         protected void ValidateTypeOfReport(object source, ServerValidateEventArgs args)
         {
-            args.IsValid = UnusedReport.Checked || UsedMultipleTimesReport.Checked;
+            args.IsValid = this.UnusedReport.Checked || this.UsedMultipleTimesReport.Checked;
         }
-
     }
 }

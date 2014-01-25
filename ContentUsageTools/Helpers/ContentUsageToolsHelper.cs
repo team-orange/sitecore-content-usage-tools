@@ -1,20 +1,38 @@
-﻿using ContentUsageTools.Pipelines;
-using Sitecore;
-using Sitecore.Configuration;
-using Sitecore.ContentSearch.Utilities;
-using Sitecore.Data;
-using Sitecore.Data.Items;
-using Sitecore.Links;
-using Sitecore.Pipelines;
-using Sitecore.Sites;
-using Sitecore.Web;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿/* Copyright (C) 2014 Dražen Janjiček, Johann Baziret, Robin Hermanussen
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see http://www.gnu.org/licenses/. */
 
 namespace ContentUsageTools.Helpers
 {
+    using ContentUsageTools.Pipelines;
+    using Sitecore;
+    using Sitecore.Configuration;
+    using Sitecore.ContentSearch.Utilities;
+    using Sitecore.Data.Items;
+    using Sitecore.Diagnostics;
+    using Sitecore.Links;
+    using Sitecore.Pipelines;
+    using Sitecore.Sites;
+    using Sitecore.Web;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    /// <summary>
+    /// Helper class for shared functionality.
+    /// </summary>
     public static class ContentUsageToolsHelper
     {
         /// <summary>
@@ -27,14 +45,18 @@ namespace ContentUsageTools.Helpers
         /// which are not in the content or the media library
         /// </summary>
         /// <param name="item"></param>
-        /// <returns></returns>
+        /// <returns>The linked items.</returns>
         public static IEnumerable<Item> GetLinkedItemsInContentAndMediaLibrary(Item item)
         {
-            var links = Globals.LinkDatabase.GetReferrers(item);
-            var referenceItemList = new List<Item>();
-            referenceItemList.AddRange(
-                links.Where(itemLink => IsInContentOrMediaLibrary(itemLink.GetSourceItem())).Select(itemLink => itemLink.GetSourceItem()));
+            Assert.IsNotNull(item, "item");
 
+            ItemLink[] links = Globals.LinkDatabase.GetReferrers(item);
+            List<Item> referenceItemList = new List<Item>();
+
+            referenceItemList.AddRange(links
+                .Where(itemLink => IsInContentOrMediaLibrary(itemLink.GetSourceItem()))
+                .Select(itemLink => itemLink.GetSourceItem())
+            );
 
             return referenceItemList.Distinct(new ItemEqualityComparer());
         }
@@ -45,18 +67,23 @@ namespace ContentUsageTools.Helpers
         /// Please refer to the <contentusagetools.determineifpage /> pipeline to extend this function.
         /// </summary>
         /// <param name="item"></param>
-        /// <returns></returns>
+        /// <returns>true|false</returns>
         public static bool IsPage(Item item)
         {
-            // Call the pipeline contentusagetools.determineifpage
             DetermineIfPagePipelineArgs args = new DetermineIfPagePipelineArgs(item);
             CorePipeline.Run("contentusagetools.determineifpage", args);
+            
             return args.IsPage;
         }
 
+        /// <summary>
+        /// Determines whether [is in content or media library] [the specified item].
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <returns>true|false</returns>
         public static bool IsInContentOrMediaLibrary(Item item)
         {
-            return item.Paths.IsMediaItem || item.Paths.IsContentItem;
+            return (item.Paths.IsMediaItem || item.Paths.IsContentItem);
         }
 
         /// <summary>
@@ -73,7 +100,7 @@ namespace ContentUsageTools.Helpers
         /// Resolves the url for the item to the correct site and returns the url.
         /// </summary>
         /// <param name="item"></param>
-        /// <returns></returns>
+        /// <returns>The page URL.</returns>
         public static string GetResolvedPageUrl(Item item)
         {
             SiteInfo site = GetCorrectSite(item.Paths.FullPath) ?? Context.Site.SiteInfo;
@@ -98,13 +125,16 @@ namespace ContentUsageTools.Helpers
                     {
                         return false;
                     }
+
                     string startItem1 = info.RootPath + info.StartItem;
-                    Item item1 = Context.ContentDatabase.GetItem(startItem1);
-                    if (item1 == null)
+                    Item item = Context.ContentDatabase.GetItem(startItem1);
+                    
+                    if (item == null)
                     {
                         return false;
                     }
-                    return itemPath.StartsWith(item1.Paths.FullPath, StringComparison.OrdinalIgnoreCase);
+
+                    return itemPath.StartsWith(item.Paths.FullPath, StringComparison.OrdinalIgnoreCase);
                 });
         }
 
@@ -115,30 +145,17 @@ namespace ContentUsageTools.Helpers
         /// <returns></returns>
         public static string GetLinkedItemsID(Item item)
         {
+            ItemLink[] links = Globals.LinkDatabase.GetReferrers(item);
+            StringBuilder sb = new StringBuilder();
 
-            var links = Globals.LinkDatabase.GetReferrers(item);
-            var sbId = new StringBuilder();
-            links.ForEach(it => sbId.AppendFormat("{0}|", it.SourceItemID));
-            if (sbId.Length > 0)
+            links.ForEach(it => sb.AppendFormat("{0}|", it.SourceItemID));
+            
+            if (sb.Length > 0)
             {
-                sbId.Remove(sbId.Length - 1, 1);
+                sb.Remove(sb.Length - 1, 1);
             }
-            return sbId.ToString();
+
+            return sb.ToString();
         }
     }
-
-    #region IEqualityComparer Implementations
-    public class ItemEqualityComparer : IEqualityComparer<Item>
-    {
-        public bool Equals(Item x, Item y)
-        {
-            return x.ID.Equals(y.ID);
-        }
-
-        public int GetHashCode(Item obj)
-        {
-            return obj.ID.GetHashCode();
-        }
-    }
-    #endregion
 }

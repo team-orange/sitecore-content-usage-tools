@@ -15,8 +15,8 @@
         <div class="container">
             <div class="row-fluid">
                 <div class="span9">
-
-                    <h1><asp:Literal runat="server" ID="Title" /></h1>
+                    <h1>
+                        <asp:Literal runat="server" ID="Title" /></h1>
                     <div class="form-group">
                         <div class="radio-inline">
                             <asp:RadioButton runat="server" ID="UseIndex" Text="Search using the index for speed (somewhat less reliable)" GroupName="Index" />
@@ -27,10 +27,10 @@
                     </div>
                     <div class="form-group">
                         <div class="checkbox-inline">
-                            <asp:CheckBox runat="server" ID="UnusedReport" GroupName="report" ValidationGroup="Report"  />
+                            <asp:CheckBox runat="server" ID="UnusedReport" GroupName="report" ValidationGroup="Report" />
                         </div>
                         <div class="checkbox-inline">
-                            <asp:CheckBox runat="server" ID="UsedMultipleTimesReport" GroupName="report" ValidationGroup="Report"  />
+                            <asp:CheckBox runat="server" ID="UsedMultipleTimesReport" GroupName="report" ValidationGroup="Report" />
                         </div>
                         <asp:CustomValidator runat="server" ID="CvTypeOfReport" OnServerValidate="ValidateTypeOfReport" ValidationGroup="Report" Display="Dynamic"></asp:CustomValidator>
                     </div>
@@ -60,6 +60,7 @@
                         </ItemTemplate>
                         <FooterTemplate>
                             </table>
+                       
                         </FooterTemplate>
                     </asp:Repeater>
                     <asp:Repeater runat="server" ID="rptResultsReferredItemsReport" Visible="False">
@@ -90,6 +91,7 @@
                         </ItemTemplate>
                         <FooterTemplate>
                             </table>
+                       
                         </FooterTemplate>
                     </asp:Repeater>
                 </div>
