@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentUsageTools", "Conten
 EndProject
 Project("{CAA73BB0-EF22-4D79-A57E-DF67B3BA9C80}") = "ContentUsageTools.Tds.Core", "..\ContentUsageTools.Tds.Core\ContentUsageTools.Tds.Core.scproj", "{C022739D-1BC1-41CC-AFC0-98EF2CC0934A}"
 EndProject
+Project("{CAA73BB0-EF22-4D79-A57E-DF67B3BA9C80}") = "ContentUsageTools.Tds.Master", "..\ContentUsageTools.Tds.Master\ContentUsageTools.Tds.Master.scproj", "{C29B2C9D-A4B4-4F33-B154-B10AE3E4EB23}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,12 @@ Global
 		{C022739D-1BC1-41CC-AFC0-98EF2CC0934A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C022739D-1BC1-41CC-AFC0-98EF2CC0934A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C022739D-1BC1-41CC-AFC0-98EF2CC0934A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{C29B2C9D-A4B4-4F33-B154-B10AE3E4EB23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C29B2C9D-A4B4-4F33-B154-B10AE3E4EB23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C29B2C9D-A4B4-4F33-B154-B10AE3E4EB23}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{C29B2C9D-A4B4-4F33-B154-B10AE3E4EB23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C29B2C9D-A4B4-4F33-B154-B10AE3E4EB23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C29B2C9D-A4B4-4F33-B154-B10AE3E4EB23}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
