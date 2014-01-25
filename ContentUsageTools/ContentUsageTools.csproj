@@ -60,9 +60,18 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="layouts\Orange\ComponentControl.ascx" />
+    <Content Include="layouts\Sample layout.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="layouts\Orange\ComponentControl.ascx.cs">
+      <DependentUpon>ComponentControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="layouts\Orange\ComponentControl.ascx.designer.cs">
+      <DependentUpon>ComponentControl.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <PropertyGroup>
