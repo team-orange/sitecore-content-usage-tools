@@ -87,6 +87,16 @@ namespace ContentUsageTools.Helpers
         }
 
         /// <summary>
+        /// Check if the item is in the core database
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public static bool IsInCoreDatabase(Item item)
+        {
+            return item.Database.Equals(Factory.GetDatabase("core"));
+        }
+
+        /// <summary>
         /// Check if an item is UnUsed 
         /// </summary>
         /// <param name="item"></param>

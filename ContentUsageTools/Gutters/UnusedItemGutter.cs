@@ -57,8 +57,9 @@ namespace ContentUsageTools.Gutters
             bool isUnused = ContentUsageToolsHelper.IsUnused(current);
             bool isValidContent = ContentUsageToolsHelper.IsInContentOrMediaLibrary(current);
             bool isStandardFields = current.Fields.All(f => f.Name.StartsWith("_"));
+            bool isInCore = ContentUsageToolsHelper.IsInCoreDatabase(current);
 
-            return (!isPage && isUnused && isValidContent && !isStandardFields);
+            return (!isPage && isUnused && isValidContent && !isStandardFields && !isInCore);
         }
     }
 }
