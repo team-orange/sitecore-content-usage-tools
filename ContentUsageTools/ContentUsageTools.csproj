@@ -66,6 +66,7 @@
     <Compile Include="Gutters\UnusedItemGutter.cs" />
     <Compile Include="Commands\ShowComponentReferencesCommand.cs" />
     <Compile Include="Helpers\ContentUsageToolsHelper.cs" />
+    <Compile Include="PageExtenders\ContentUsageToolsPageExtender.cs" />
     <Compile Include="Pipelines\ContentEditorContentUsageMessage.cs" />
     <Content Include="layouts\Orange\ComponentControl.ascx" />
     <Content Include="layouts\Sample layout.aspx" />
@@ -84,7 +85,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Config\Include\ContentUsageTools.config" />
+    <Content Include="App_Config\Include\ContentUsageTools.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
