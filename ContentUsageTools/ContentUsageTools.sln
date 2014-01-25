@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentUsageTools", "ContentUsageTools.csproj", "{B1E75244-0D9B-4AFE-ADDD-691FBE60D471}"
 EndProject
+Project("{CAA73BB0-EF22-4D79-A57E-DF67B3BA9C80}") = "ContentUsageTools.Tds.Core", "..\ContentUsageTools.Tds.Core\ContentUsageTools.Tds.Core.scproj", "{C022739D-1BC1-41CC-AFC0-98EF2CC0934A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,12 @@ Global
 		{B1E75244-0D9B-4AFE-ADDD-691FBE60D471}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1E75244-0D9B-4AFE-ADDD-691FBE60D471}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1E75244-0D9B-4AFE-ADDD-691FBE60D471}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C022739D-1BC1-41CC-AFC0-98EF2CC0934A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C022739D-1BC1-41CC-AFC0-98EF2CC0934A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C022739D-1BC1-41CC-AFC0-98EF2CC0934A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{C022739D-1BC1-41CC-AFC0-98EF2CC0934A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C022739D-1BC1-41CC-AFC0-98EF2CC0934A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C022739D-1BC1-41CC-AFC0-98EF2CC0934A}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
