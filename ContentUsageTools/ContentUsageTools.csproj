@@ -48,6 +48,12 @@
     <Reference Include="Sitecore.Kernel">
       <HintPath>..\Binaries\Sitecore.Kernel.dll</HintPath>
     </Reference>
+    <Reference Include="Sitecore.Mvc">
+      <HintPath>..\Binaries\Sitecore.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Mvc.ExperienceEditor">
+      <HintPath>..\Binaries\Sitecore.Mvc.ExperienceEditor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -73,6 +79,7 @@
     <Compile Include="Helpers\ConfigurationHelper.cs" />
     <Compile Include="Helpers\ContentUsageToolsHelper.cs" />
     <Compile Include="Helpers\ItemEqualityComparer.cs" />
+    <Compile Include="PageExtenders\MvcContentUsageToolsPageExtender.cs" />
     <Compile Include="sitecore modules\Content Usage Tools\Content Usage Report.aspx.cs">
       <DependentUpon>Content Usage Report.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
