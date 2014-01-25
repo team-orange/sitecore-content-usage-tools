@@ -1,31 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using ContentUsageTools.Helpers;
-using Sitecore;
-using Sitecore.Configuration;
 using Sitecore.ContentSearch;
 using Sitecore.ContentSearch.SearchTypes;
-using Sitecore.Data;
-using Sitecore.Data.Clones;
 using Sitecore.Data.Items;
 using Sitecore.Globalization;
-using Sitecore.Links;
-using Sitecore.Web;
-using Sitecore.Web.UI.XslControls;
 
 namespace ContentUsageTools.Reports
 {
     public partial class ContentUsageReport : System.Web.UI.Page
     {
+
         public class ReportItem
         {
             private Item Item { get; set; }
 
-            public ReportItem(Item item,bool searchWithIndex)
+            public ReportItem(Item item, bool searchWithIndex)
             {
                 Item = item;
                 SearchWithIndex = searchWithIndex;
@@ -110,13 +102,10 @@ namespace ContentUsageTools.Reports
             {
                 if (reportItems == null)
                 {
-
-
                     Item root = RootItem;
                     reportItems = root.Axes.GetDescendants()
                                .Where(item => !ContentUsageToolsHelper.IsPage(item)
                                               && !item.Fields.All(f => f.Name.StartsWith("_")));
-
                 }
                 return reportItems;
             }
