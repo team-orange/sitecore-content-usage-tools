@@ -1,4 +1,4 @@
-Sitecore Content Usage Tools
+﻿Sitecore Content Usage Tools
 ============================
 
 ## Synopsis
@@ -16,7 +16,7 @@ When editing content, it is of vital importance that the editor knows exactly wh
 * In the **content editor**, there is a gutter item that can be used to spot content items that are not being used in any page (they can be deleted by clicking on them).
 * In the **content editor**, a message is displayed above the fields to indicate on what pages specific the item is being used.
 * In the **page editor**, a floating pane is displayed when a component is selected. The pane displays the pages on which the content is being used.
-* From the **desktop start menu**, select "Reporting Tools" > "Content Usage Report" to get detailed reports about where content is being used and what content is not being used anywhere. This can be powered by the Sitecore 7 search indexes �r the regular (slower) way.
+* From the **desktop start menu**, select "Reporting Tools" > "Content Usage Report" to get detailed reports about where content is being used and what content is not being used anywhere. This can be powered by the Sitecore 7 search indexes or the regular (slower) way.
 
 ## Installation
 
@@ -24,13 +24,13 @@ Download the latest installation package from this link.
 
 ## Contributors
 
-* **Drazen Janjicek** - @djanjicek
+* **Dražen Janjiček** - @djanjicek
 * **Johann Baziret** - @bazijjoba
 * **Robin Hermanussen** - @knifecore
 
 ## License
 
-Copyright (C) 2014 Drazen Janjicek, Johann Baziret, Robin Hermanussen
+Copyright (C) 2014 Dražen Janjiček, Johann Baziret, Robin Hermanussen
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
