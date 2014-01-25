@@ -66,17 +66,17 @@
     <Compile Include="Gutters\UnusedItemGutter.cs" />
     <Compile Include="Commands\ShowComponentReferencesCommand.cs" />
     <Compile Include="Helpers\ContentUsageToolsHelper.cs" />
-    <Compile Include="layouts\Orange\Content Usage Report.aspx.cs">
+    <Compile Include="sitecore modules\Content Usage Tools\Content Usage Report.aspx.cs">
       <DependentUpon>Content Usage Report.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="layouts\Orange\Content Usage Report.aspx.designer.cs">
+    <Compile Include="sitecore modules\Content Usage Tools\Content Usage Report.aspx.designer.cs">
       <DependentUpon>Content Usage Report.aspx</DependentUpon>
     </Compile>
     <Compile Include="PageExtenders\ContentUsageToolsPageExtender.cs" />
     <Compile Include="Pipelines\ContentEditorContentUsageMessage.cs" />
     <Content Include="layouts\Orange\ComponentControl.ascx" />
-    <Content Include="layouts\Orange\Content Usage Report.aspx" />
+    <Content Include="sitecore modules\Content Usage Tools\Content Usage Report.aspx" />
     <Content Include="layouts\Sample layout.aspx" />
     <Content Include="sitecore modules\Content Usage Tools\js\ContentUsageTools.js" />
   </ItemGroup>
