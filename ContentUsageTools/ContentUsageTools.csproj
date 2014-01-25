@@ -63,6 +63,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gutters\UnusedItemGutter.cs" />
     <Compile Include="Commands\ShowComponentReferencesCommand.cs" />
     <Compile Include="Helpers\ContentUsageToolsHelper.cs" />
     <Compile Include="Pipelines\ContentEditorContentUsageMessage.cs" />
