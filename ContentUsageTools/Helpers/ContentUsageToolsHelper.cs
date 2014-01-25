@@ -1,20 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web;
-using ContentUsageTools.Pipelines;
+﻿using ContentUsageTools.Pipelines;
 using Sitecore;
 using Sitecore.Configuration;
 using Sitecore.ContentSearch.Utilities;
 using Sitecore.Data.Items;
-using Sitecore.Links;
 using Sitecore.Pipelines;
+using Sitecore.Web;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace ContentUsageTools.Helpers
 {
     public static class ContentUsageToolsHelper
     {
+        /// <summary>
+        /// These websites should not be used when resolving what website an item belongs to.
+        /// </summary>
+        private readonly static string[] ExcludeSites = new[] { "shell", "modules_shell", "modules_website" };
+
         /// <summary>
         /// Return a list of item which is linked to the item in parameters
         /// </summary>
@@ -27,7 +31,7 @@ namespace ContentUsageTools.Helpers
             referenceItemList.AddRange(
                 links.Select(itemLink => Factory.GetDatabase("master").GetItem(itemLink.SourceItemID)));
 
-
+           
             return referenceItemList;
         }
 
@@ -57,6 +61,30 @@ namespace ContentUsageTools.Helpers
         }
 
         /// <summary>
+        /// Retrieves the siteinfo belonging to the item path.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns>The siteinfo.</returns>
+        public static SiteInfo GetCorrectSite(string itemPath)
+        {
+            return Factory.GetSiteInfoList().FirstOrDefault(
+                info =>
+                    {
+                        if (ExcludeSites.Contains(info.Name.ToLowerInvariant()))
+                        {
+                            return false;
+                        }
+                        string startItem1 = info.RootPath + info.StartItem;
+                        Item item1 = Context.ContentDatabase.GetItem(startItem1);
+                        if (item1 == null)
+                        {
+                            return false;
+                        }
+                        return itemPath.StartsWith(item1.Paths.FullPath, StringComparison.OrdinalIgnoreCase);
+                    });
+        }
+
+        /// <summary>
         /// Return a list of itemId serparated by a pipe "|" which is linked to the item in parameters
         /// </summary>
         /// <param name="item"></param>
@@ -73,7 +101,5 @@ namespace ContentUsageTools.Helpers
             }
             return sbId.ToString();
         }
-
-
     }
 }
