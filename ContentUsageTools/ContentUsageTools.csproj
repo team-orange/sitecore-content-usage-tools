@@ -64,6 +64,7 @@
     <Content Include="layouts\Sample layout.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pipelines\HasPresentationSettings.cs" />
     <Compile Include="layouts\Orange\ComponentControl.ascx.cs">
       <DependentUpon>ComponentControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -72,6 +73,9 @@
       <DependentUpon>ComponentControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Config\Include\ContentUsageTools.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
