@@ -13,7 +13,7 @@ namespace ContentUsageTools.Helpers
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public IEnumerable<Item> LinkedItems(Item item)
+        public IEnumerable<Item> GetLinkedItems(Item item)
         {
             return null;
         }
@@ -36,8 +36,11 @@ namespace ContentUsageTools.Helpers
         /// <returns></returns>
         public bool IsUnused(Item item)
         {
-            
+            // TODO : Call the LinkedItem check if it's empty
+            return true;
         }
+
+
 
 
     }
