@@ -60,6 +60,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pipelines\ContentEditorContentUsageMessage.cs" />
     <Content Include="layouts\Orange\ComponentControl.ascx" />
     <Content Include="layouts\Sample layout.aspx" />
   </ItemGroup>
