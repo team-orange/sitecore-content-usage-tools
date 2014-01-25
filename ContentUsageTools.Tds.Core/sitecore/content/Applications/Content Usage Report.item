@@ -13,9 +13,9 @@ templatekey: Application
 field: {FC2B18B3-1631-4C3F-9E47-51DF05030026}
 name: Icon
 key: icon
-content-length: 30
+content-length: 27
 
-Software/32x32/application.png
+network/32x32/link_view.png
 ----field----
 field: {094829C2-D7A7-4C38-B025-B99FF2001B56}
 name: Disable close
@@ -75,7 +75,7 @@ content-length: 145
 ----version----
 language: en
 version: 1
-revision: b13e76aa-c168-488f-a578-631cbfe5cff6
+revision: 37b9f548-3c81-4028-b0b3-0b786a998e8b
 
 ----field----
 field: {67B6378B-C9F1-47C7-9CAC-BFA79B0727D9}
@@ -111,14 +111,14 @@ name: __Revision
 key: __revision
 content-length: 36
 
-b13e76aa-c168-488f-a578-631cbfe5cff6
+37b9f548-3c81-4028-b0b3-0b786a998e8b
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
 content-length: 34
 
-20140125T073007:635262318073361873
+20140125T122139:635262492991550282
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by
