@@ -85,7 +85,7 @@
     <SitecoreItem Include="sitecore\content\Applications\Content Usage Report.item">
       <Icon>/temp/IconCache/Software/16x16/application.png</Icon>
       <ItemDeployment>AlwaysUpdate</ItemDeployment>
-      <ChildItemSynchronization>KeepAllChildrenSynchronized</ChildItemSynchronization>
+      <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
     </SitecoreItem>
     <SitecoreItem Include="sitecore\content\Applications\WebEdit.item">
       <Icon>/temp/IconCache/Network/16x16/Environment.png</Icon>
@@ -120,6 +120,7 @@
     <SitecoreItem Include="sitecore\layout\Layouts\Layouts\Content Usage Report.item">
       <Icon>/temp/IconCache/Applications/16x16/text_rich_colored.png</Icon>
       <ItemDeployment>AlwaysUpdate</ItemDeployment>
+      <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
     </SitecoreItem>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\HedgehogDevelopment\SitecoreProject\v9.0\HedgehogDevelopment.SitecoreProject.targets" />

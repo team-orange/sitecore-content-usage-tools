@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ContentUsageTools.layouts.Orange {
+namespace ContentUsageTools.Reports {
     
     
-    public partial class Content_Usage_Report {
+    public partial class ContentUsageReport {
         
         /// <summary>
         /// mainform control.
@@ -28,7 +28,7 @@ namespace ContentUsageTools.layouts.Orange {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton UnusedReport;
+        protected global::System.Web.UI.WebControls.CheckBox UnusedReport;
         
         /// <summary>
         /// UsedMultipleTimesReport control.
@@ -37,7 +37,7 @@ namespace ContentUsageTools.layouts.Orange {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton UsedMultipleTimesReport;
+        protected global::System.Web.UI.WebControls.CheckBox UsedMultipleTimesReport;
         
         /// <summary>
         /// CvTypeOfReport control.
@@ -85,12 +85,21 @@ namespace ContentUsageTools.layouts.Orange {
         protected global::System.Web.UI.WebControls.Button GenerateReport;
         
         /// <summary>
-        /// ResultRepeater control.
+        /// rptResultsUnusedReport control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater ResultRepeater;
+        protected global::System.Web.UI.WebControls.Repeater rptResultsUnusedReport;
+        
+        /// <summary>
+        /// rptResultsReferredItemsReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptResultsReferredItemsReport;
     }
 }
