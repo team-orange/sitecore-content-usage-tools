@@ -4,6 +4,7 @@ using Sitecore.Diagnostics;
 using Sitecore.Links;
 using Sitecore.Shell.Applications.WebEdit.Commands;
 using Sitecore.Shell.Framework.Commands;
+using Sitecore.Sites;
 using Sitecore.Web;
 using Sitecore.Web.UI.Sheer;
 using System;
@@ -32,22 +33,22 @@ namespace ContentUsageTools.Commands
 
         private void RetrieveReferences(Item current)
         {
-            IEnumerable<Item> references = ContentUsageToolsHelper.GetLinkedItems(current);
+            List<Item> references = ContentUsageToolsHelper.GetLinkedItems(current).ToList();
 
             if(references != null && references.Any())
             {
-                List<string> urls = new List<string>();
 
-                SiteInfo site = ContentUsageToolsHelper.GetCorrectSite(current.Paths.Path);
+                string[] urls = references.Select(item =>
+                    {
+                        SiteInfo site = ContentUsageToolsHelper.GetCorrectSite(item.Paths.FullPath) ?? Sitecore.Context.Site.SiteInfo;
 
-                if(site != null)
-                {
-                    Sitecore.Context.SetActiveSite(site.Name);
-                }
+                        using (new SiteContextSwitcher(new SiteContext(site)))
+                        {
+                            return String.Format("{0}|{1}", item.Paths.Path, LinkManager.GetItemUrl(item));
+                        }
+                    }).ToArray();
 
-                references.ToList().ForEach(item => urls.Add(String.Format("{0}|{1}", item.Paths.Path, LinkManager.GetItemUrl(item))));
-
-                SheerResponse.Eval("parent.showComponentReferences('" + String.Join(",", urls.ToArray()) + "')");  
+                SheerResponse.Eval("parent.showComponentReferences('" + String.Join(",", urls) + "')");  
             }
         }
     }

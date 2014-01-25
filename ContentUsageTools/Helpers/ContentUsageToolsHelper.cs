@@ -15,6 +15,11 @@ namespace ContentUsageTools.Helpers
     public static class ContentUsageToolsHelper
     {
         /// <summary>
+        /// These websites should not be used when resolving what website an item belongs to.
+        /// </summary>
+        private readonly static string[] ExcludeSites = new[] { "shell", "modules_shell", "modules_website" };
+
+        /// <summary>
         /// Return a list of item which is linked to the item in parameters
         /// </summary>
         /// <param name="item"></param>
@@ -62,8 +67,21 @@ namespace ContentUsageTools.Helpers
         /// <returns>The siteinfo.</returns>
         public static SiteInfo GetCorrectSite(string itemPath)
         {
-            SiteInfo siteInfo = Factory.GetSiteInfoList().Where(info => itemPath.StartsWith(info.RootPath + info.StartItem, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
-            return siteInfo;
+            return Factory.GetSiteInfoList().FirstOrDefault(
+                info =>
+                    {
+                        if (ExcludeSites.Contains(info.Name.ToLowerInvariant()))
+                        {
+                            return false;
+                        }
+                        string startItem1 = info.RootPath + info.StartItem;
+                        Item item1 = Context.ContentDatabase.GetItem(startItem1);
+                        if (item1 == null)
+                        {
+                            return false;
+                        }
+                        return itemPath.StartsWith(item1.Paths.FullPath, StringComparison.OrdinalIgnoreCase);
+                    });
         }
 
         /// <summary>
