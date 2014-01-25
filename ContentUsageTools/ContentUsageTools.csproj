@@ -98,7 +98,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Config\Include\ContentUsageTools.config" />
+    <Content Include="App_Config\Include\ContentUsageTools.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

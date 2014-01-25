@@ -19,10 +19,10 @@
                     <h1>Content Usage Report</h1>
                     <div class="form-group">
                         <div class="radio-inline">
-                            <asp:RadioButton runat="server" ID="UseIndex" Text="Use the Index for speed search" GroupName="Index" />
+                            <asp:RadioButton runat="server" ID="UseIndex" Text="Search using the index for speed (somewhat less reliable)" GroupName="Index" />
                         </div>
                         <div class="radio-inline">
-                            <asp:RadioButton runat="server" ID="NoIndex" Text="Use normal search" GroupName="Index" />
+                            <asp:RadioButton runat="server" ID="NoIndex" Text="Normal report (much slower, but a little more reliable)" GroupName="Index" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -38,6 +38,7 @@
                         <asp:Label ID="PathLabel" runat="server" AssociatedControlID="PathTextBox" />
                         <asp:TextBox runat="server" ID="PathTextBox" Text="/sitecore/content" ValidationGroup="Report" CssClass="form-control" />
                         <asp:RequiredFieldValidator ID="RequiredPath" runat="server" ControlToValidate="PathTextBox" Display="Dynamic" ValidationGroup="Report"></asp:RequiredFieldValidator>
+                        <asp:Label ID="ErrorLabel" runat="server" CssClass="error" />
                     </div>
 
                     <div class="form-group">
@@ -80,7 +81,7 @@
                                             <ul class="list-unstyled">
                                         </HeaderTemplate>
                                         <ItemTemplate>
-                                            <li><a href="<%# LinkManager.GetItemUrl(((Item) Container.DataItem), new UrlOptions() { SiteResolving = true}) %>"><%# ((Item) Container.DataItem).Paths.ContentPath %></a></li>
+                                            <li><a target="_blank" href="<%# LinkManager.GetItemUrl(((Item) Container.DataItem), new UrlOptions() { SiteResolving = true}) %>"><%# ((Item) Container.DataItem).Paths.ContentPath %></a></li>
                                         </ItemTemplate>
                                         <FooterTemplate></ul></FooterTemplate>
                                     </asp:Repeater>

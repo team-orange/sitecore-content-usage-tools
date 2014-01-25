@@ -7,6 +7,7 @@ using Sitecore.ContentSearch;
 using Sitecore.ContentSearch.SearchTypes;
 using Sitecore.Data.Items;
 using Sitecore.Globalization;
+using Sitecore.Diagnostics;
 
 namespace ContentUsageTools.Reports
 {
@@ -43,9 +44,9 @@ namespace ContentUsageTools.Reports
                     if (SearchWithIndex)
                     {
                         referredItems = new List<Item>();
-                        using (var context = ContentSearchManager.GetIndex("sitecore_master_index").CreateSearchContext())
+                        using (IProviderSearchContext context = ContentSearchManager.GetIndex("sitecore_master_index").CreateSearchContext())
                         {
-                            foreach (var source in context.GetQueryable<SearchResultItem>().Where(x => x.Paths.Contains(Item.ID)))
+                            foreach (SearchResultItem source in context.GetQueryable<SearchResultItem>().Where(x => x.Paths.Contains(Item.ID)))
                             {
                                 foreach (var linkedItem in source["LinkedItems"].Split('|').Where(x => !string.IsNullOrEmpty(x)))
                                 {
@@ -133,21 +134,37 @@ namespace ContentUsageTools.Reports
 
         protected void GenerateReport_OnClick(object sender, EventArgs e)
         {
+            ErrorLabel.Text = "";
             Page.Validate();
             if (Page.IsValid && RootItem != null)
             {
-                rptResultsUnusedReport.Visible = rptResultsReferredItemsReport.Visible = false;
-                if (UnusedReport.Checked)
+                try
                 {
-                    rptResultsUnusedReport.Visible = true;
-                    rptResultsUnusedReport.DataSource = UnusedReportItems;
-                    rptResultsUnusedReport.DataBind();
+                    rptResultsUnusedReport.Visible = rptResultsReferredItemsReport.Visible = false;
+                    if (UnusedReport.Checked)
+                    {
+                        rptResultsUnusedReport.Visible = true;
+                        rptResultsUnusedReport.DataSource = UnusedReportItems;
+                        rptResultsUnusedReport.DataBind();
+                    }
+                    if (UsedMultipleTimesReport.Checked)
+                    {
+                        rptResultsReferredItemsReport.Visible = true;
+                        rptResultsReferredItemsReport.DataSource = ReferredItemsReportItems;
+                        rptResultsReferredItemsReport.DataBind();
+                    }
                 }
-                if (UsedMultipleTimesReport.Checked)
+                catch (KeyNotFoundException keyNotFoundExc)
                 {
-                    rptResultsReferredItemsReport.Visible = true;
-                    rptResultsReferredItemsReport.DataSource = ReferredItemsReportItems;
-                    rptResultsReferredItemsReport.DataBind();
+                    string message = "An exception occurred during generating the report; this may be due to the index not being up to date. Try the \"Normal report\" or rebuild the search index.";
+                    Log.Error(message, keyNotFoundExc, this);
+                    ErrorLabel.Text = Translate.Text(message);
+                }
+                catch (Exception exc)
+                {
+                    string message = Translate.Text("An exception occurred during generating the report. The error has been logged.");
+                    Log.Error(message, exc, this);
+                    ErrorLabel.Text = Translate.Text(message);
                 }
             }
         }

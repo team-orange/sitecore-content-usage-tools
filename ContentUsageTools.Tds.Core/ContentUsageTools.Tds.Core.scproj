@@ -130,6 +130,7 @@
     <SitecoreItem Include="sitecore\content\Documents and settings\All users\Start menu\Right\Reporting Tools\Scan for unused content.item">
       <Icon>/temp/IconCache/network/32x32/link_view.png</Icon>
       <ItemDeployment>AlwaysUpdate</ItemDeployment>
+      <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
     </SitecoreItem>
     <SitecoreItem Include="sitecore\layout.item">
       <Icon>/temp/IconCache/Applications/16x16/windows.png</Icon>
