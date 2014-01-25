@@ -20,7 +20,8 @@ When editing content, it is of vital importance that the editor knows exactly wh
 
 ## Installation
 
-Download the latest installation package from this link.
+Download the latest installation ZIP package from this link:
+https://github.com/team-orange/sitecore-content-usage-tools/tree/master/Package
 
 ## Contributors
 
