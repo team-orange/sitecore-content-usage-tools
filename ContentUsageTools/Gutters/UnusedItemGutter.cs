@@ -19,7 +19,9 @@ namespace ContentUsageTools.Gutters
         {
             GutterIconDescriptor descriptor = null;
 
-            if (!ContentUsageToolsHelper.IsPage(item) && ContentUsageToolsHelper.IsUnused(item))
+            if (! ContentUsageToolsHelper.IsPage(item)
+                && ContentUsageToolsHelper.IsUnused(item)
+                && ! item.Fields.All(f => f.Name.StartsWith("_")))
             {
                 descriptor = new GutterIconDescriptor
                 {

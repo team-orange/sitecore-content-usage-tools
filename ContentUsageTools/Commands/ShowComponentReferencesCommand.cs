@@ -1,14 +1,13 @@
-﻿using Sitecore.Configuration;
+﻿using ContentUsageTools.Helpers;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Links;
 using Sitecore.Shell.Applications.WebEdit.Commands;
 using Sitecore.Shell.Framework.Commands;
 using Sitecore.Web.UI.Sheer;
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace ContentUsageTools.Commands
 {
@@ -31,12 +30,12 @@ namespace ContentUsageTools.Commands
 
         private void RetrieveReferences(Item current)
         {
-            ItemLink[] references = Sitecore.Globals.LinkDatabase.GetItemReferrers(current, false);
+            IEnumerable<Item> references = ContentUsageToolsHelper.GetLinkedItems(current);
 
             if(references != null && references.Any())
             {
                 List<string> urls = new List<string>();
-                references.ToList().ForEach(itemLink => urls.Add(LinkManager.GetItemUrl(Factory.GetDatabase("master").GetItem(itemLink.SourceItemID), UrlOptions.DefaultOptions)));
+                references.ToList().ForEach(item => urls.Add(LinkManager.GetItemUrl(item)));
 
                 SheerResponse.Eval("showComponentReferences('" + urls.ToArray() + "')");  
             }
