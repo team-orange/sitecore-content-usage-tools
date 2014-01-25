@@ -1,15 +1,23 @@
 ﻿
+div.divReferences {
+    position: fixed;
+    width: 300px;
+    height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
 .ulReferences {
     padding-top: -20px;
 }
 
-ul#ulReferences a
+ul.ulReferences a
 {
     font-size: 0.8em;
     color: black;
 }
 
-ul#ulReferences
+ul.ulReferences
 {
     list-style: none;
     margin: 5px 10px 5px -30px;
