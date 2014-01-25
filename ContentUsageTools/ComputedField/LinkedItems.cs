@@ -14,7 +14,11 @@ namespace ContentUsageTools.ComputedField
         public object ComputeFieldValue(IIndexable indexable)
         {
             var item = (Item)(indexable as SitecoreIndexableItem);
-            if (item == null)
+            if (item == null )
+            {
+                return null;
+            }
+            if (!item.Paths.IsContentItem && !item.Paths.IsMediaItem)
             {
                 return null;
             }

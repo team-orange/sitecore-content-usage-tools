@@ -1,31 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using ContentUsageTools.Helpers;
-using Sitecore;
-using Sitecore.Configuration;
-using Sitecore.Data.Clones;
+using Sitecore.ContentSearch;
+using Sitecore.ContentSearch.SearchTypes;
 using Sitecore.Data.Items;
 using Sitecore.Globalization;
-using Sitecore.Links;
-using Sitecore.Web;
-using Sitecore.Web.UI.XslControls;
 
 namespace ContentUsageTools.Reports
 {
     public partial class ContentUsageReport : System.Web.UI.Page
     {
+
         public class ReportItem
         {
             private Item Item { get; set; }
 
-            public ReportItem(Item item)
+            public ReportItem(Item item, bool searchWithIndex)
             {
                 Item = item;
+                SearchWithIndex = searchWithIndex;
             }
+
+            public bool SearchWithIndex { get; set; }
 
             public string DisplayName
             {
@@ -40,7 +38,31 @@ namespace ContentUsageTools.Reports
             private List<Item> referredItems;
             public List<Item> ReferredItems
             {
-                get { return referredItems ?? (referredItems = ContentUsageToolsHelper.GetLinkedItems(Item).ToList()); }
+                get
+                {
+                    if (SearchWithIndex)
+                    {
+                        referredItems = new List<Item>();
+                        using (var context = ContentSearchManager.GetIndex("sitecore_master_index").CreateSearchContext())
+                        {
+                            foreach (var source in context.GetQueryable<SearchResultItem>().Where(x => x.Paths.Contains(Item.ID)))
+                            {
+                                foreach (var linkedItem in source["LinkedItems"].Split('|').Where(x => !string.IsNullOrEmpty(x)))
+                                {
+                                    var item = Sitecore.Context.ContentDatabase.GetItem(linkedItem);
+                                    if (ContentUsageToolsHelper.IsPage(item) && item.Fields.All(f => f.Name.StartsWith("_")))
+                                    {
+                                        referredItems.Add(item);
+                                    }
+                                }
+                            }
+                        }
+
+
+                        return referredItems;
+                    }
+                    return referredItems ?? (referredItems = ContentUsageToolsHelper.GetLinkedItems(Item).ToList());
+                }
             }
 
         }
@@ -50,9 +72,12 @@ namespace ContentUsageTools.Reports
         {
             get
             {
+
+
+
                 return referredItemsReportItems ??
                        (referredItemsReportItems = ReportItems.Where(item => !ContentUsageToolsHelper.IsUnused(item))
-                                                              .Select(item => new ReportItem(item))
+                                                              .Select(item => new ReportItem(item, UseIndex.Checked))
                                                               .Where(item => item.ReferredItems.Any())
                                                               .ToList());
             }
@@ -65,7 +90,7 @@ namespace ContentUsageTools.Reports
             {
                 return unusedReportItems ??
                        (unusedReportItems = ReportItems.Where(item => ContentUsageToolsHelper.IsUnused(item))
-                                                              .Select(item => new ReportItem(item))
+                                                              .Select(item => new ReportItem(item, UseIndex.Checked))
                                                               .ToList());
             }
         }
@@ -98,8 +123,9 @@ namespace ContentUsageTools.Reports
             PathLabel.Text = Translate.Text("Item start path");
             GenerateReport.Text = Translate.Text("Generate report");
             CvTypeOfReport.Text = Translate.Text("You must choose at least one of the reports");
-            if (! Page.IsPostBack)
+            if (!Page.IsPostBack)
             {
+                UseIndex.Checked = true;
                 UnusedReport.Checked = true;
                 RequiredPath.Text = Translate.Text("Please enter a valid path within Sitecore to start from");
             }
