@@ -60,6 +60,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pipelines\ContentEditorContentUsageMessage.cs" />
     <Compile Include="Pipelines\HasPresentationSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
