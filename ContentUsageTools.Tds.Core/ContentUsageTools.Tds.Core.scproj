@@ -80,19 +80,45 @@
     <SitecoreItem Include="sitecore\content\Applications\Content Editor\Gutters\Unused Items.item">
       <Icon>/temp/IconCache/Applications/32x32/Document.png</Icon>
       <ItemDeployment>AlwaysUpdate</ItemDeployment>
+      <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
+    </SitecoreItem>
+    <SitecoreItem Include="sitecore\content\Applications\Content Usage Report.item">
+      <Icon>/temp/IconCache/Software/16x16/application.png</Icon>
+      <ItemDeployment>AlwaysUpdate</ItemDeployment>
+      <ChildItemSynchronization>KeepAllChildrenSynchronized</ChildItemSynchronization>
     </SitecoreItem>
     <SitecoreItem Include="sitecore\content\Applications\WebEdit.item">
       <Icon>/temp/IconCache/Network/16x16/Environment.png</Icon>
       <ItemDeployment>AlwaysUpdate</ItemDeployment>
       <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
     </SitecoreItem>
-    <SitecoreItem Include="sitecore\content\Applications\WebEdit\Custom Experience Buttons.item">
+    <SitecoreItem Include="sitecore\content\Applications\WebEdit\Default Rendering Buttons.item">
       <Icon>/temp/IconCache/Applications/16x16/folder.png</Icon>
       <ItemDeployment>AlwaysUpdate</ItemDeployment>
       <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
     </SitecoreItem>
-    <SitecoreItem Include="sitecore\content\Applications\WebEdit\Custom Experience Buttons\Show references.item">
+    <SitecoreItem Include="sitecore\content\Applications\WebEdit\Default Rendering Buttons\Show references.item">
       <Icon>/temp/IconCache/Network/32x32/link_view.png</Icon>
+      <ItemDeployment>AlwaysUpdate</ItemDeployment>
+      <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
+    </SitecoreItem>
+    <SitecoreItem Include="sitecore\layout.item">
+      <Icon>/temp/IconCache/Applications/16x16/windows.png</Icon>
+      <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
+      <ItemDeployment>AlwaysUpdate</ItemDeployment>
+    </SitecoreItem>
+    <SitecoreItem Include="sitecore\layout\Layouts.item">
+      <Icon>/temp/IconCache/Applications/16x16/windows.png</Icon>
+      <ItemDeployment>AlwaysUpdate</ItemDeployment>
+      <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
+    </SitecoreItem>
+    <SitecoreItem Include="sitecore\layout\Layouts\Layouts.item">
+      <Icon>/temp/IconCache/Applications/16x16/folder.png</Icon>
+      <ItemDeployment>AlwaysUpdate</ItemDeployment>
+      <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
+    </SitecoreItem>
+    <SitecoreItem Include="sitecore\layout\Layouts\Layouts\Content Usage Report.item">
+      <Icon>/temp/IconCache/Applications/16x16/text_rich_colored.png</Icon>
       <ItemDeployment>AlwaysUpdate</ItemDeployment>
     </SitecoreItem>
   </ItemGroup>
