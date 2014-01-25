@@ -1,4 +1,6 @@
 ﻿
 function showComponentReferences(urls) {
-    alert(urls.length);
+    if (urls) {
+
+    }
 }
