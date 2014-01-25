@@ -30,10 +30,11 @@ function showComponentReferences(datasourceItemId, data) {
     removePanels(); // Make sure we start clean
 
     var arr = data.split(',');
-    
+
     contentUsageToolsComponentNumber++;
     var compId = 'cut_comp_' + contentUsageToolsComponentNumber;
-    var toAppend = '<div id="' + compId + '" class="scChromeControls divReferences" onblur="removePanels();"><ul class="ulReferences">';
+    var count = (arr.length > 0 && arr[0] !== '') ? arr.length : 0;
+    var toAppend = '<div id="' + compId + '" class="divReferences" onblur="removePanels();"><span class=\"align-normal\">Content usage (' + count + ')</span><span class=\"align-right\"><a class=\"closePanel\" href=\"#\" onclick=\"removePanels();\">x</a></span><hr /><ul class="ulReferences">';
 
     if (arr.length > 0 && arr[0] !== '') {
         for (var i = 0, l = arr.length; i < l; i++) {
@@ -45,7 +46,7 @@ function showComponentReferences(datasourceItemId, data) {
     } else {
         toAppend = toAppend + '<li><i>- No other pages use this content -</i></li>';
     }
-    toAppend = toAppend + '</ul><br /><a href=\"#\" onclick=\"removePanels();\">Close</a></div>';
+    toAppend = toAppend + '</ul><br /></div>';
 
     var scChromeToolbar = document.getElementsByClassName('scChromeToolbar');
 
