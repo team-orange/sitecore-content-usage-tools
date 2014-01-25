@@ -2,8 +2,11 @@
 using Sitecore;
 using Sitecore.Configuration;
 using Sitecore.ContentSearch.Utilities;
+using Sitecore.Data;
 using Sitecore.Data.Items;
+using Sitecore.Links;
 using Sitecore.Pipelines;
+using Sitecore.Sites;
 using Sitecore.Web;
 using System;
 using System.Collections.Generic;
@@ -67,11 +70,26 @@ namespace ContentUsageTools.Helpers
         }
 
         /// <summary>
+        /// Resolves the url for the item to the correct site and returns the url.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public static string GetResolvedPageUrl(Item item)
+        {
+            SiteInfo site = GetCorrectSite(item.Paths.FullPath) ?? Context.Site.SiteInfo;
+
+            using (new SiteContextSwitcher(new SiteContext(site)))
+            {
+                return LinkManager.GetItemUrl(item);
+            }
+        }
+
+        /// <summary>
         /// Retrieves the siteinfo belonging to the item path.
         /// </summary>
         /// <param name="item"></param>
         /// <returns>The siteinfo.</returns>
-        public static SiteInfo GetCorrectSite(string itemPath)
+        private static SiteInfo GetCorrectSite(string itemPath)
         {
             return Factory.GetSiteInfoList().FirstOrDefault(
                 info =>

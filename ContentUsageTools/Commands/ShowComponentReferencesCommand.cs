@@ -41,15 +41,10 @@ namespace ContentUsageTools.Commands
                 references = references.Where(r => r.ID != pageItem.ID).ToList();
             }
             
-            string[] urls = references.Select(item =>
-                {
-                    SiteInfo site = ContentUsageToolsHelper.GetCorrectSite(item.Paths.FullPath) ?? Sitecore.Context.Site.SiteInfo;
-
-                    using (new SiteContextSwitcher(new SiteContext(site)))
-                    {
-                        return String.Format("{0}|{1}", item.Paths.Path, LinkManager.GetItemUrl(item));
-                    }
-                }).ToArray();
+            string[] urls = references.Select(item => 
+                string.Format("{0}|{1}",
+                    item.Paths.ContentPath,
+                    ContentUsageToolsHelper.GetResolvedPageUrl(item))).ToArray();
 
             SheerResponse.Eval(string.Format("parent.showComponentReferences('{0}', '{1}')", datasourceItem.ID, String.Join(",", urls)));
         }
