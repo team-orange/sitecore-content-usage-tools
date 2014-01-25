@@ -6,7 +6,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c29b2c9d-a4b4-4f33-b154-b10ae3e4eb23</ProjectGuid>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
-    <SourceWebPhysicalPath>..</SourceWebPhysicalPath>
+    <SourceWebPhysicalPath>..\ContentUsageTools</SourceWebPhysicalPath>
     <SourceWebProject>{b1e75244-0d9b-4afe-addd-691fbe60d471}|ContentUsageTools.csproj</SourceWebProject>
     <SourceWebVirtualPath>/ContentUsageTools.csproj</SourceWebVirtualPath>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>

@@ -1,4 +1,5 @@
-﻿using Sitecore.Data.Items;
+﻿using Sitecore.Configuration;
+using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Links;
 using Sitecore.Shell.Applications.WebEdit.Commands;
@@ -35,7 +36,7 @@ namespace ContentUsageTools.Commands
             if(references != null && references.Any())
             {
                 List<string> urls = new List<string>();
-                references.ToList().ForEach(link => urls.Add(LinkManager.GetItemUrl(link.GetSourceItem(), UrlOptions.DefaultOptions)));
+                references.ToList().ForEach(itemLink => urls.Add(LinkManager.GetItemUrl(Factory.GetDatabase("master").GetItem(itemLink.SourceItemID), UrlOptions.DefaultOptions)));
 
                 SheerResponse.Eval("showComponentReferences('" + urls.ToArray() + "')");  
             }
