@@ -23,7 +23,9 @@ namespace ContentUsageTools.Gutters
         {
             GutterIconDescriptor descriptor = null;
 
-            if (!ContentUsageToolsHelper.IsPage(item) && ContentUsageToolsHelper.IsUnused(item))
+            if (! ContentUsageToolsHelper.IsPage(item)
+                && ContentUsageToolsHelper.IsUnused(item)
+                && ! item.Fields.All(f => f.Name.StartsWith("_")))
             {
                 descriptor = new GutterIconDescriptor();
                 descriptor.Icon = "Control/32x32/bar_hor_d.png"; //Remove the Hardcodede Path - Settings 
