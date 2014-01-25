@@ -86,6 +86,11 @@ namespace ContentUsageTools.Helpers
             return (item.Paths.IsMediaItem || item.Paths.IsContentItem);
         }
 
+        public static bool IsInCoreDatabase(Item item)
+        {
+            return item.Database.Equals(Factory.GetDatabase("core"));
+        }
+
         /// <summary>
         /// Check if an item is UnUsed 
         /// </summary>
