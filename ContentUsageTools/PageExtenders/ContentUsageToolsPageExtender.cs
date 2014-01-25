@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using Sitecore.Layouts;
+﻿using Sitecore.Layouts;
 using Sitecore.Layouts.PageExtenders;
-using Sitecore.Shell.Applications.ContentEditor;
 using Sitecore.Sites;
 using Sitecore.Web;
-using Sitecore.Web.UI.HtmlControls;
 using Literal = Sitecore.Web.UI.HtmlControls.Literal;
 
 namespace ContentUsageTools.PageExtenders
@@ -27,15 +19,30 @@ namespace ContentUsageTools.PageExtenders
                 && site.DisplayMode == DisplayMode.Edit
                 && WebUtil.GetQueryString("sc_webedit") != "0")
             {
-                RenderingReference reference = new RenderingReference(
-                    new Literal()
-                        {
-                            Text = "<script type=\"text/javascript\" src=\"/sitecore modules/Content Usage Tools/js/ContentUsageTools.js\"></script>"
-                        });
-                reference.Placeholder = "webedit";
-                reference.AddToFormIfUnused = true;
-                Sitecore.Context.Page.AddRendering(reference);
+                Literal js = new Literal()
+                {
+                    Text = "<script type=\"text/javascript\" src=\"/sitecore modules/Content Usage Tools/js/ContentUsageTools.js\"></script>"
+                };
+
+                Literal css = new Literal()
+                {
+                    Text = "<link href=\"/sitecore modules/Content Usage Tools/css/ContentUsageTools.css\" rel=\"stylesheet\" type=\"text/css\">"
+                };
+
+                this.InjectScript(js);
+                this.InjectScript(css);
             }
+        }
+
+        private void InjectScript(Literal literal)
+        {
+            RenderingReference reference = new RenderingReference(literal)
+            {
+                Placeholder = "webedit",
+                AddToFormIfUnused = true
+            };
+
+            Sitecore.Context.Page.AddRendering(reference);
         }
     }
 }

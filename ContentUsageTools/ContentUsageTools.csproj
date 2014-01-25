@@ -78,6 +78,7 @@
     <Content Include="layouts\Orange\ComponentControl.ascx" />
     <Content Include="layouts\Orange\Content Usage Report.aspx" />
     <Content Include="layouts\Sample layout.aspx" />
+    <Content Include="sitecore modules\Content Usage Tools\css\ContentUsageTools.css" />
     <Content Include="sitecore modules\Content Usage Tools\js\ContentUsageTools.js" />
   </ItemGroup>
   <ItemGroup>

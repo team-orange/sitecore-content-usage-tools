@@ -1,0 +1,16 @@
+﻿
+.ulReferences {
+    padding-top: -20px;
+}
+
+ul#ulReferences a
+{
+    font-size: 0.8em;
+    color: black;
+}
+
+ul#ulReferences
+{
+    list-style: none;
+    margin: 5px 10px 5px -30px;
+}
