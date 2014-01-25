@@ -2,14 +2,16 @@
 function showComponentReferences(data) {
     if (data) {
 
+        removePanel(); // Make sure we start clean
+
         var arr = data.split(',');
-        var toAppend = '<ul id="divReferences">';
+        var toAppend = '<div id="divReferences" class="scChromeControls"><ul id="ulReferences">';
 
         for (var i = 0, l = arr.length; i < l; i++) {
 
             var arr2 = arr[i].split('|');
 
-            toAppend = toAppend + '<a href="' + arr2[1] + '">' + arr2[0] + "</a>";
+            toAppend = toAppend + '<li><a href="' + arr2[1] + '">' + arr2[0] + "</a></li>";
         }
 
         var scChromeToolbar = document.getElementsByClassName('scChromeToolbar')[1];
@@ -17,7 +19,7 @@ function showComponentReferences(data) {
         if (scChromeToolbar) {
 
             window.onclick = removePanel;
-            scChromeToolbar.insertAdjacentHTML('beforeend', toAppend + '</ul>');
+            scChromeToolbar.insertAdjacentHTML('beforeend', toAppend + '</ul></div>');
         }
     }
 }
@@ -25,9 +27,8 @@ function showComponentReferences(data) {
 function removePanel() {
 
     var references = document.getElementById('divReferences');
-    var scChromeToolbar = document.getElementsByClassName('scChromeToolbar')[1];
 
-    if (scChromeToolbar && references) {
-        scChromeToolbar.removeChild(references);
+    if (references && references.parentNode) {
+        references.parentNode.removeChild(references);
     }
 }
