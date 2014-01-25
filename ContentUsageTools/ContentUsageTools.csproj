@@ -66,6 +66,7 @@
     <Content Include="layouts\Sample layout.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pipelines\DetermineIfPagePipelineArgs.cs" />
     <Compile Include="Pipelines\HasPresentationSettings.cs" />
     <Compile Include="layouts\Orange\ComponentControl.ascx.cs">
       <DependentUpon>ComponentControl.ascx</DependentUpon>

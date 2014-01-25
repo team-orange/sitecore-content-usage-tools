@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using ContentUsageTools.Helpers;
 using Sitecore;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
@@ -15,7 +16,8 @@ namespace ContentUsageTools.Pipelines
     {
         public void Process(GetContentEditorWarningsArgs args)
         {
-            if (args.Item == null)
+            if (args.Item == null
+                || ContentUsageToolsHelper.IsPage(args.Item)) // don't show this message for pages themselves
             {
                 return;
             }
