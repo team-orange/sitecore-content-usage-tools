@@ -2,6 +2,7 @@
 using Sitecore.Data.Items;
 using Sitecore.Globalization;
 using Sitecore.Shell.Applications.ContentEditor.Gutters;
+using System.Linq;
 
 namespace ContentUsageTools.Gutters
 {
@@ -19,9 +20,9 @@ namespace ContentUsageTools.Gutters
         {
             GutterIconDescriptor descriptor = null;
 
-            if (! ContentUsageToolsHelper.IsPage(item)
+            if (!ContentUsageToolsHelper.IsPage(item)
                 && ContentUsageToolsHelper.IsUnused(item)
-                && ! item.Fields.All(f => f.Name.StartsWith("_")))
+                && !item.Fields.All(f => f.Name.StartsWith("_")))
             {
                 descriptor = new GutterIconDescriptor
                 {
