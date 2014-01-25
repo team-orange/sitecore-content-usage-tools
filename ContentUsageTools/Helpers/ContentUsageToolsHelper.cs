@@ -124,7 +124,7 @@ namespace ContentUsageTools.Helpers
         /// <summary>
         /// Retrieves the siteinfo belonging to the item path.
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="itemPath"></param>
         /// <returns>The siteinfo.</returns>
         private static SiteInfo GetCorrectSite(string itemPath)
         {
