@@ -18,9 +18,13 @@ When editing content, it is of vital importance that the editor knows exactly wh
 * In the **page editor**, a floating pane is displayed when a component is selected. The pane displays the pages on which the content is being used.
 * From the **desktop start menu**, select "Reporting Tools" > "Content Usage Report" to get detailed reports about where content is being used and what content is not being used anywhere. This can be powered by the Sitecore 7 search indexes or the regular (slower) way.
 
+For more information  on how to use these features, please read the user manual (available in .docx or .pdf):
+https://github.com/team-orange/sitecore-content-usage-tools/tree/master/Documentation
+
 ## Installation
 
-Download the latest installation package from this link.
+Download the latest installation ZIP package from this link:
+https://github.com/team-orange/sitecore-content-usage-tools/tree/master/Package
 
 ## Contributors
 
