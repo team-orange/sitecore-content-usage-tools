@@ -17,24 +17,47 @@ using System.Linq;
 
 namespace ContentUsageTools.Commands
 {
+    /// <summary>
+    /// Determine what other pages the selected rendering's content is being used on.
+    /// </summary>
     public class ShowComponentReferencesCommand : WebEditCommand
     {
         public override void Execute(CommandContext context)
         {
             Assert.ArgumentNotNull(context, "context");
-            if (context == null)
+            if (context == null
+                || context.Items == null
+                || ! context.Items.Any())
             {
                 return;
             }
 
-            Item current = context.Items.FirstOrDefault();
+            Item pageItem = GetPageItem();
 
-            if(current != null)
+            Item datasourceItem = context.Items[0];
+            List<Item> references = ContentUsageToolsHelper.GetLinkedItems(datasourceItem).ToList();
+            if (pageItem != null)
             {
-                RetrieveReferences(current);
+                references = references.Where(r => r.ID != pageItem.ID).ToList();
             }
+            
+            string[] urls = references.Select(item =>
+                {
+                    SiteInfo site = ContentUsageToolsHelper.GetCorrectSite(item.Paths.FullPath) ?? Sitecore.Context.Site.SiteInfo;
+
+                    using (new SiteContextSwitcher(new SiteContext(site)))
+                    {
+                        return String.Format("{0}|{1}", item.Paths.Path, LinkManager.GetItemUrl(item));
+                    }
+                }).ToArray();
+
+            SheerResponse.Eval(string.Format("parent.showComponentReferences('{0}', '{1}')", datasourceItem.ID, String.Join(",", urls)));
         }
 
+        /// <summary>
+        /// Determine what page is currently being viewed in the page editor, so we can exclude it from the references list.
+        /// </summary>
+        /// <returns></returns>
         private static Item GetPageItem()
         {
             if (Sitecore.Context.Database != null 
@@ -51,33 +74,6 @@ namespace ContentUsageTools.Commands
                 }
             }
             return null;
-        }
-
-        private void RetrieveReferences(Item current)
-        {
-            Item pageItem = GetPageItem();
-
-            List<Item> references = ContentUsageToolsHelper.GetLinkedItems(current).ToList();
-            if (pageItem != null)
-            {
-                references = references.Where(r => r.ID != pageItem.ID).ToList();
-            }
-
-            if(references != null && references.Any())
-            {
-
-                string[] urls = references.Select(item =>
-                    {
-                        SiteInfo site = ContentUsageToolsHelper.GetCorrectSite(item.Paths.FullPath) ?? Sitecore.Context.Site.SiteInfo;
-
-                        using (new SiteContextSwitcher(new SiteContext(site)))
-                        {
-                            return String.Format("{0}|{1}", item.Paths.Path, LinkManager.GetItemUrl(item));
-                        }
-                    }).ToArray();
-
-                SheerResponse.Eval("parent.showComponentReferences('" + String.Join(",", urls) + "')");  
-            }
         }
     }
 }
