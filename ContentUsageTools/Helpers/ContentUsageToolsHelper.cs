@@ -8,6 +8,8 @@ using Sitecore.Configuration;
 using Sitecore.Data.Items;
 using Sitecore.Links;
 using Sitecore.Pipelines;
+using Sitecore.Sites;
+using Sitecore.Web;
 
 namespace ContentUsageTools.Helpers
 {
@@ -54,8 +56,15 @@ namespace ContentUsageTools.Helpers
             return !GetLinkedItems(item).Any();
         }
 
-
-
-
+        /// <summary>
+        /// Retrieves the siteinfo belonging to the item path.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns>The siteinfo.</returns>
+        public static SiteInfo GetCorrectSite(string itemPath)
+        {
+            SiteInfo siteInfo = Factory.GetSiteInfoList().Where(info => itemPath.StartsWith(info.RootPath + info.StartItem, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+            return siteInfo;
+        }
     }
 }

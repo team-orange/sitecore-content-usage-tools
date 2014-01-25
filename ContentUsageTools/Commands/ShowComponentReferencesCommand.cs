@@ -4,6 +4,7 @@ using Sitecore.Diagnostics;
 using Sitecore.Links;
 using Sitecore.Shell.Applications.WebEdit.Commands;
 using Sitecore.Shell.Framework.Commands;
+using Sitecore.Web;
 using Sitecore.Web.UI.Sheer;
 using System;
 using System.Collections;
@@ -36,6 +37,13 @@ namespace ContentUsageTools.Commands
             if(references != null && references.Any())
             {
                 List<string> urls = new List<string>();
+
+                SiteInfo site = ContentUsageToolsHelper.GetCorrectSite(current.Paths.Path);
+
+                if(site != null)
+                {
+                    Sitecore.Context.SetActiveSite(site.Name);
+                }
 
                 references.ToList().ForEach(item => urls.Add(String.Format("{0}|{1}", item.Paths.Path, LinkManager.GetItemUrl(item))));
 
