@@ -1,14 +1,40 @@
 ﻿
 var contentUsageToolsComponentNumber = 1;
+var contentUsageToolsCurrentId = '';
+
+function checkComponentUpdate() {
+    contentUsageToolsComponentNumber++;
+
+    var scChromeToolbar = document.getElementsByClassName('scChromeToolbar');
+
+    if (scChromeToolbar) {
+        // skip the first, as it's not the kind of scChromeToolbar we're looking for
+        for (var j = 1; j < scChromeToolbar.length; j++) {
+            var toolBarId = determineToolbarId(scChromeToolbar[j]);
+            if (toolBarId != null) {
+                if (toolBarId !== contentUsageToolsCurrentId) {
+                    contentUsageToolsCurrentId = toolBarId;
+                    Sitecore.PageModes.PageEditor.postRequest('orange:showreferences(id=' + toolBarId + ')', null, false);
+                }
+            } else {
+                removePanels();
+            }
+        }
+    }
+}
+
+// use polling to determine if the 'show references' window should be displayed.
+setInterval(checkComponentUpdate, 500);
 
 function showComponentReferences(datasourceItemId, data) {
     removePanels(); // Make sure we start clean
 
     var arr = data.split(',');
-    
+
     contentUsageToolsComponentNumber++;
     var compId = 'cut_comp_' + contentUsageToolsComponentNumber;
-    var toAppend = '<div id="' + compId + '" class="scChromeControls divReferences" onblur="removePanels();"><ul id="ulReferences">';
+    var count = (arr.length > 0 && arr[0] !== '') ? arr.length : 0;
+    var toAppend = '<div id="' + compId + '" class="divReferences" onblur="removePanels();"><span class=\"align-normal\">Content usage (' + count + ')</span><span class=\"align-right\"><a class=\"closePanel\" href=\"#\" onclick=\"removePanels();\">x</a></span><hr /><ul class="ulReferences">';
 
     if (arr.length > 0 && arr[0] !== '') {
         for (var i = 0, l = arr.length; i < l; i++) {
@@ -20,7 +46,7 @@ function showComponentReferences(datasourceItemId, data) {
     } else {
         toAppend = toAppend + '<li><i>- No other pages use this content -</i></li>';
     }
-    toAppend = toAppend + '<br /><a href=\"#\" onclick=\"removePanels();\">Close</a></ul></div>';
+    toAppend = toAppend + '</ul><br /></div>';
 
     var scChromeToolbar = document.getElementsByClassName('scChromeToolbar');
 
@@ -32,6 +58,8 @@ function showComponentReferences(datasourceItemId, data) {
                 window.onclick = removePanels;
                 scChromeToolbar[j].insertAdjacentHTML('beforeend', toAppend);
                 var addedComp = document.getElementById(compId);
+                addedComp.style.left = (document.body.clientWidth - addedComp.clientWidth) + 'px';
+                addedComp.style.top = (document.body.clientHeight - addedComp.clientHeight) + 'px';
                 addedComp.focus();
                 break;
             }
