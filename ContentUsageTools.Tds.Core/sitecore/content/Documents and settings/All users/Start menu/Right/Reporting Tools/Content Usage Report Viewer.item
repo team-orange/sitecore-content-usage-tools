@@ -1,10 +1,10 @@
 ----item----
 version: 1
-id: {8FF89380-9DDD-4D9B-88B4-074FB91095FB}
+id: {336BC837-B06F-4186-B299-AEFA84108D6E}
 database: core
-path: /sitecore/content/Documents and settings/All users/Start menu/Right/Reporting Tools/Content Usage Report
+path: /sitecore/content/Documents and settings/All users/Start menu/Right/Reporting Tools/Content Usage Report Viewer
 parent: {E5563CE1-2F76-410F-81F7-1BA58C6FFF75}
-name: Content Usage Report
+name: Content Usage Report Viewer
 master: {5E8CFCF9-CEF2-4BDB-9E35-219C50184066}
 template: {72450C9C-98C4-4117-88B7-573110C7E0C0}
 templatekey: Application shortcut
@@ -15,7 +15,7 @@ name: Application
 key: application
 content-length: 112
 
-<link text='' linktype='internal' style='' alt=''  querystring='' id='{4E655185-7FA3-419D-90DA-83B3E340672B}' />
+<link text='' linktype='internal' style='' alt=''  querystring='' id='{34B0F991-2F3B-44D3-8243-D81F00DCCAC4}' />
 ----field----
 field: {06D5295C-ED2F-4A54-9BF2-26228D113318}
 name: __Icon
@@ -40,15 +40,15 @@ content-length: 0
 ----version----
 language: en
 version: 1
-revision: cea01e6e-1760-4592-8197-f4b7a7dc6759
+revision: 78144f91-5df1-49eb-8a70-a5909e4a7b35
 
 ----field----
 field: {C032DB76-CC34-4F8F-BE2D-D2FB35237AAB}
 name: Display name
 key: display name
-content-length: 20
+content-length: 27
 
-Content Usage Report
+Content Usage Report Viewer
 ----field----
 field: {52807595-0F8F-4B20-8D2A-CB71D28C6103}
 name: __Owner
@@ -62,7 +62,7 @@ name: __Created
 key: __created
 content-length: 15
 
-20140125T094153
+20140125T095713
 ----field----
 field: {5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}
 name: __Created by
@@ -76,14 +76,14 @@ name: __Revision
 key: __revision
 content-length: 36
 
-cea01e6e-1760-4592-8197-f4b7a7dc6759
+78144f91-5df1-49eb-8a70-a5909e4a7b35
 ----field----
 field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
 name: __Updated
 key: __updated
 content-length: 34
 
-20140125T094242:635262397623031478
+20140125T095738:635262406588731830
 ----field----
 field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
 name: __Updated by
