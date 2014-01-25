@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using ContentUsageTools.Helpers;
+﻿using ContentUsageTools.Helpers;
 using Sitecore.Data.Items;
-using Sitecore.Shell.Applications.ContentEditor;
+using Sitecore.Globalization;
 using Sitecore.Shell.Applications.ContentEditor.Gutters;
 
 namespace ContentUsageTools.Gutters
@@ -27,9 +23,11 @@ namespace ContentUsageTools.Gutters
                 && ContentUsageToolsHelper.IsUnused(item)
                 && ! item.Fields.All(f => f.Name.StartsWith("_")))
             {
-                descriptor = new GutterIconDescriptor();
-                descriptor.Icon = "Control/32x32/bar_hor_d.png"; //Remove the Hardcodede Path - Settings 
-                descriptor.Tooltip = "This item is unused, you can probably delete it"; //Translation 
+                descriptor = new GutterIconDescriptor
+                {
+                    Icon = "Control/32x32/bar_hor_d.png",
+                    Tooltip = Translate.Text("This item is unused, you can probably delete it")
+                };
             }
 
             return descriptor;
