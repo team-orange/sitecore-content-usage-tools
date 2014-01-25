@@ -29,6 +29,7 @@ namespace ContentUsageTools.Helpers
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using Common = ContentUsageTools.Common;
 
     /// <summary>
     /// Helper class for shared functionality.
@@ -38,7 +39,13 @@ namespace ContentUsageTools.Helpers
         /// <summary>
         /// These websites should not be used when resolving what website an item belongs to.
         /// </summary>
-        private readonly static string[] ExcludeSites = new[] { "shell", "modules_shell", "modules_website", "login","admin","service" };
+        private static string[] ExcludeSites
+        {
+            get
+            {
+                return ConfigurationHelper.GetSettingAsArray(Common.Constants.Config.ExcludedWebsiteNamesSetting);
+            }
+        }
 
         /// <summary>
         /// Return a list of item which is linked to the item in parameters and exclude all the item 
