@@ -1,4 +1,5 @@
-﻿using ContentUsageTools.Helpers;
+﻿using System.Linq;
+using ContentUsageTools.Helpers;
 using Sitecore.Data.Items;
 using Sitecore.Globalization;
 using Sitecore.Shell.Applications.ContentEditor.Gutters;

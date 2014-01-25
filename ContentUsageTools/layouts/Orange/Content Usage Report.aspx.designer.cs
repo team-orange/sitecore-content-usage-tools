@@ -67,6 +67,15 @@ namespace ContentUsageTools.layouts.Orange {
         protected global::System.Web.UI.WebControls.TextBox PathTextBox;
         
         /// <summary>
+        /// RequiredPath control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredPath;
+        
+        /// <summary>
         /// GenerateReport control.
         /// </summary>
         /// <remarks>
