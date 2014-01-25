@@ -73,8 +73,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\ShowComponentReferencesCommand.cs" />
+    <Compile Include="Common\Constants.cs" />
     <Compile Include="Fields\Search\LinkedItems.cs" />
     <Compile Include="Gutters\UnusedItemGutter.cs" />
+    <Compile Include="Helpers\ConfigurationHelper.cs" />
     <Compile Include="Helpers\ContentUsageToolsHelper.cs" />
     <Compile Include="Helpers\ItemEqualityComparer.cs" />
     <Compile Include="PageExtenders\MvcContentUsageToolsPageExtender.cs" />

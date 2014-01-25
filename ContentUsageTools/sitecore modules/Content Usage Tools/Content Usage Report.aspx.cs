@@ -93,7 +93,10 @@ namespace ContentUsageTools.Reports
 
                                     if (ContentUsageToolsHelper.IsPage(item))
                                     {
-                                        this.referredItems.Add(item);
+                                        if (!this.referredItems.Contains(item,new ItemEqualityComparer()))
+                                        {
+                                            this.referredItems.Add(item);
+                                        }
                                     }
                                 }
                             }
@@ -220,7 +223,7 @@ namespace ContentUsageTools.Reports
                 }
                 catch (KeyNotFoundException keyNotFoundExc)
                 {
-                    string message = "An exception occurred during generating the report; this may be due to the index not being up to date. Try the \"Normal report\" or rebuild the search index.";
+                    string message = "An exception occurred during generating the report; this may be due to the index not being up to date. Try the \"Normal report\" or rebuild the \"sitecore_master_index\" search index.";
                     Log.Error(message, keyNotFoundExc, this);
                     this.ErrorLabel.Text = Translate.Text(message);
                 }
