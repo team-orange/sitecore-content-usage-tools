@@ -82,7 +82,7 @@
       <ItemDeployment>AlwaysUpdate</ItemDeployment>
       <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
     </SitecoreItem>
-    <SitecoreItem Include="sitecore\content\Applications\Content Usage Report Application.item">
+    <SitecoreItem Include="sitecore\content\Applications\Content Usage Report.item">
       <Icon>/temp/IconCache/Software/16x16/application.png</Icon>
       <ItemDeployment>AlwaysUpdate</ItemDeployment>
       <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
@@ -102,36 +102,6 @@
       <ItemDeployment>AlwaysUpdate</ItemDeployment>
       <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
     </SitecoreItem>
-    <SitecoreItem Include="sitecore\content\Documents and settings.item">
-      <Icon>/temp/IconCache/Applications/16x16/documents_gear.png</Icon>
-      <ItemDeployment>AlwaysUpdate</ItemDeployment>
-      <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
-    </SitecoreItem>
-    <SitecoreItem Include="sitecore\content\Documents and settings\All users.item">
-      <Icon>/temp/IconCache/Applications/16x16/folder.png</Icon>
-      <ItemDeployment>AlwaysUpdate</ItemDeployment>
-      <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
-    </SitecoreItem>
-    <SitecoreItem Include="sitecore\content\Documents and settings\All users\Start menu.item">
-      <Icon>/temp/IconCache/Applications/16x16/folder.png</Icon>
-      <ItemDeployment>AlwaysUpdate</ItemDeployment>
-      <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
-    </SitecoreItem>
-    <SitecoreItem Include="sitecore\content\Documents and settings\All users\Start menu\Right.item">
-      <Icon>/temp/IconCache/Applications/16x16/folder.png</Icon>
-      <ItemDeployment>AlwaysUpdate</ItemDeployment>
-      <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
-    </SitecoreItem>
-    <SitecoreItem Include="sitecore\content\Documents and settings\All users\Start menu\Right\Reporting Tools.item">
-      <Icon>/temp/IconCache/People/16x16/Toolbox.png</Icon>
-      <ItemDeployment>AlwaysUpdate</ItemDeployment>
-      <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
-    </SitecoreItem>
-    <SitecoreItem Include="sitecore\content\Documents and settings\All users\Start menu\Right\Reporting Tools\Content Usage Report Viewer.item">
-      <Icon>/temp/IconCache/Software/32x32/text_code_colored.png</Icon>
-      <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
-      <ItemDeployment>AlwaysUpdate</ItemDeployment>
-    </SitecoreItem>
     <SitecoreItem Include="sitecore\layout.item">
       <Icon>/temp/IconCache/Applications/16x16/windows.png</Icon>
       <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
@@ -147,10 +117,10 @@
       <ItemDeployment>AlwaysUpdate</ItemDeployment>
       <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
     </SitecoreItem>
-    <SitecoreItem Include="sitecore\layout\Layouts\Layouts\Content Usage Report Layout.item">
+    <SitecoreItem Include="sitecore\layout\Layouts\Layouts\Content Usage Report.item">
       <Icon>/temp/IconCache/Applications/16x16/text_rich_colored.png</Icon>
       <ItemDeployment>AlwaysUpdate</ItemDeployment>
-      <ChildItemSynchronization>KeepAllChildrenSynchronized</ChildItemSynchronization>
+      <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
     </SitecoreItem>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\HedgehogDevelopment\SitecoreProject\v9.0\HedgehogDevelopment.SitecoreProject.targets" />
