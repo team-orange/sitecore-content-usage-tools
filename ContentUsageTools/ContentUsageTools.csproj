@@ -60,6 +60,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gutters\UnusedItemGutter.cs" />
     <Compile Include="Helpers\ContentUsageToolsHelper.cs" />
     <Compile Include="Pipelines\ContentEditorContentUsageMessage.cs" />
     <Content Include="layouts\Orange\ComponentControl.ascx" />
