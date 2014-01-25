@@ -35,7 +35,7 @@ namespace ContentUsageTools.Gutters
         /// <returns></returns>
         protected override GutterIconDescriptor GetIconDescriptor(Item item)
         {
-            Assert.IsNotNull(item, "item");
+            Assert.ArgumentNotNull(item, "item");
             GutterIconDescriptor descriptor = null;
 
             if (this.Evaluate(item))
