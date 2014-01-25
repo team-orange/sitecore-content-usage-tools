@@ -21,17 +21,16 @@ namespace ContentUsageTools.Gutters
         /// <returns></returns>
         protected override GutterIconDescriptor GetIconDescriptor(Item item)
         {
-            if(!ContentUsageToolsHelper.IsPage(item))
+            GutterIconDescriptor descriptor = null;
+
+            if (!ContentUsageToolsHelper.IsPage(item) && ContentUsageToolsHelper.IsUnused(item))
             {
-                if (ContentUsageToolsHelper.IsUnused(item))
-                {
-                    GutterIconDescriptor descriptor = new GutterIconDescriptor();
-                    descriptor.Icon = "Control/32x32/bar_hor_d.png"; //Remove the Hardcodede Path - Settings 
-                    descriptor.Tooltip = "This item is unused, you can probably delete it"; //Translation 
-                    return descriptor;
-                }
+                descriptor = new GutterIconDescriptor();
+                descriptor.Icon = "Control/32x32/bar_hor_d.png"; //Remove the Hardcodede Path - Settings 
+                descriptor.Tooltip = "This item is unused, you can probably delete it"; //Translation 
             }
-            return null;
+
+            return descriptor;
         }
     }
 }
