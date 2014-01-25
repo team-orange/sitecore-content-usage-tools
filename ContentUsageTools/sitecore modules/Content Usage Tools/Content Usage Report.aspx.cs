@@ -51,7 +51,7 @@ namespace ContentUsageTools.Reports
                                 foreach (var linkedItem in source["LinkedItems"].Split('|').Where(x => !string.IsNullOrEmpty(x)))
                                 {
                                     var item = Sitecore.Context.ContentDatabase.GetItem(linkedItem);
-                                    if (ContentUsageToolsHelper.IsPage(item) && item.Fields.All(f => f.Name.StartsWith("_")))
+                                    if (ContentUsageToolsHelper.IsPage(item))
                                     {
                                         referredItems.Add(item);
                                     }
@@ -62,7 +62,7 @@ namespace ContentUsageTools.Reports
 
                         return referredItems;
                     }
-                    return referredItems ?? (referredItems = ContentUsageToolsHelper.GetLinkedItems(Item).ToList());
+                    return referredItems ?? (referredItems = ContentUsageToolsHelper.GetLinkedItemsInContentAndMediaLibrary(Item).ToList());
                 }
             }
 
@@ -105,8 +105,7 @@ namespace ContentUsageTools.Reports
                 {
                     Item root = RootItem;
                     reportItems = root.Axes.GetDescendants()
-                               .Where(item => !ContentUsageToolsHelper.IsPage(item)
-                                              && !item.Fields.All(f => f.Name.StartsWith("_")));
+                               .Where(item => !ContentUsageToolsHelper.IsPage(item));
                 }
                 return reportItems;
             }
@@ -119,6 +118,7 @@ namespace ContentUsageTools.Reports
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Title.Text = Translate.Text("Content Usage Report");
             UnusedReport.Text = Translate.Text("Unused Report");
             UsedMultipleTimesReport.Text = Translate.Text("Referred items report");
             PathLabel.Text = Translate.Text("Item start path");

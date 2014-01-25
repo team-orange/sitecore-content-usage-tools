@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using ContentUsageTools.Helpers;
-using Sitecore;
 using Sitecore.Data.Items;
-using Sitecore.Diagnostics;
 using Sitecore.Globalization;
 using Sitecore.Pipelines.GetContentEditorWarnings;
-using Sitecore.Web.UI.Sheer;
 
 namespace ContentUsageTools.Pipelines
 {
@@ -38,7 +32,7 @@ namespace ContentUsageTools.Pipelines
                 // Display what pages the item is being used on as a datasource, so you can easily navigate to them
                 GetContentEditorWarningsArgs.ContentEditorWarning contentEditorWarning = args.Add();
                 contentEditorWarning.Title = Translate.Text("This item is being used on the following pages:");
-                foreach (Item linkedPage in ContentUsageToolsHelper.GetLinkedItems(args.Item))
+                foreach (Item linkedPage in ContentUsageToolsHelper.GetLinkedItemsInContentAndMediaLibrary(args.Item))
                 {
                     string text = string.Format("Open {0} <i>({1})</i>", linkedPage.DisplayName, linkedPage.Paths.ContentPath);
                     string command = string.Format("item:load(id={0})", linkedPage.ID);

@@ -20,19 +20,20 @@ namespace ContentUsageTools.Helpers
         private readonly static string[] ExcludeSites = new[] { "shell", "modules_shell", "modules_website" };
 
         /// <summary>
-        /// Return a list of item which is linked to the item in parameters
+        /// Return a list of item which is linked to the item in parameters and exclude all the item 
+        /// which are not in the content or the media library
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public static IEnumerable<Item> GetLinkedItems(Item item)
+        public static IEnumerable<Item> GetLinkedItemsInContentAndMediaLibrary(Item item)
         {
             var links = Globals.LinkDatabase.GetReferrers(item);
             var referenceItemList = new List<Item>();
             referenceItemList.AddRange(
-                links.Select(itemLink => Factory.GetDatabase("master").GetItem(itemLink.SourceItemID)));
+                links.Where(itemLink => IsInContentOrMediaLibrary(itemLink.GetSourceItem())).Select(itemLink => itemLink.GetSourceItem()));
 
-           
-            return referenceItemList;
+
+            return referenceItemList.Distinct(new ItemEqualityComparer());
         }
 
         /// <summary>
@@ -50,6 +51,11 @@ namespace ContentUsageTools.Helpers
             return args.IsPage;
         }
 
+        public static bool IsInContentOrMediaLibrary(Item item)
+        {
+            return item.Paths.IsMediaItem || item.Paths.IsContentItem;
+        }
+
         /// <summary>
         /// Check if an item is UnUsed 
         /// </summary>
@@ -57,7 +63,7 @@ namespace ContentUsageTools.Helpers
         /// <returns></returns>
         public static bool IsUnused(Item item)
         {
-            return !GetLinkedItems(item).Any();
+            return !GetLinkedItemsInContentAndMediaLibrary(item).Any();
         }
 
         /// <summary>
@@ -69,19 +75,19 @@ namespace ContentUsageTools.Helpers
         {
             return Factory.GetSiteInfoList().FirstOrDefault(
                 info =>
+                {
+                    if (ExcludeSites.Contains(info.Name.ToLowerInvariant()))
                     {
-                        if (ExcludeSites.Contains(info.Name.ToLowerInvariant()))
-                        {
-                            return false;
-                        }
-                        string startItem1 = info.RootPath + info.StartItem;
-                        Item item1 = Context.ContentDatabase.GetItem(startItem1);
-                        if (item1 == null)
-                        {
-                            return false;
-                        }
-                        return itemPath.StartsWith(item1.Paths.FullPath, StringComparison.OrdinalIgnoreCase);
-                    });
+                        return false;
+                    }
+                    string startItem1 = info.RootPath + info.StartItem;
+                    Item item1 = Context.ContentDatabase.GetItem(startItem1);
+                    if (item1 == null)
+                    {
+                        return false;
+                    }
+                    return itemPath.StartsWith(item1.Paths.FullPath, StringComparison.OrdinalIgnoreCase);
+                });
         }
 
         /// <summary>
@@ -91,7 +97,7 @@ namespace ContentUsageTools.Helpers
         /// <returns></returns>
         public static string GetLinkedItemsID(Item item)
         {
-           
+
             var links = Globals.LinkDatabase.GetReferrers(item);
             var sbId = new StringBuilder();
             links.ForEach(it => sbId.AppendFormat("{0}|", it.SourceItemID));
@@ -102,4 +108,19 @@ namespace ContentUsageTools.Helpers
             return sbId.ToString();
         }
     }
+
+    #region IEqualityComparer Implementations
+    public class ItemEqualityComparer : IEqualityComparer<Item>
+    {
+        public bool Equals(Item x, Item y)
+        {
+            return x.ID.Equals(y.ID);
+        }
+
+        public int GetHashCode(Item obj)
+        {
+            return obj.ID.GetHashCode();
+        }
+    }
+    #endregion
 }

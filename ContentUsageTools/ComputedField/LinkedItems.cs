@@ -18,11 +18,7 @@ namespace ContentUsageTools.ComputedField
             {
                 return null;
             }
-            if (!item.Paths.IsContentItem && !item.Paths.IsMediaItem)
-            {
-                return null;
-            }
-            return ContentUsageToolsHelper.GetLinkedItemsID(item);
+            return ContentUsageToolsHelper.IsInContentOrMediaLibrary(item) ? ContentUsageToolsHelper.GetLinkedItemsID(item) : null;
         }
 
         public string FieldName { get; set; }

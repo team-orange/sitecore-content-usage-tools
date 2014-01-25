@@ -35,7 +35,7 @@ namespace ContentUsageTools.Commands
             Item pageItem = GetPageItem();
 
             Item datasourceItem = context.Items[0];
-            List<Item> references = ContentUsageToolsHelper.GetLinkedItems(datasourceItem).ToList();
+            List<Item> references = ContentUsageToolsHelper.GetLinkedItemsInContentAndMediaLibrary(datasourceItem).ToList();
             if (pageItem != null)
             {
                 references = references.Where(r => r.ID != pageItem.ID).ToList();

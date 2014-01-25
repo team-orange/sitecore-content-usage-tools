@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Content Usage Report</title>
+    <title></title>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body style="max-height: 250px; overflow-y: scroll">
@@ -16,7 +16,7 @@
             <div class="row-fluid">
                 <div class="span9">
 
-                    <h1>Content Usage Report</h1>
+                    <h1><asp:Literal runat="server" ID="Title" /></h1>
                     <div class="form-group">
                         <div class="radio-inline">
                             <asp:RadioButton runat="server" ID="UseIndex" Text="Search using the index for speed (somewhat less reliable)" GroupName="Index" />
