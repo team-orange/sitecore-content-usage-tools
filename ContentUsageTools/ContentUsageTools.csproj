@@ -42,6 +42,9 @@
     <Reference Include="Sitecore.Client">
       <HintPath>..\Binaries\Sitecore.Client.dll</HintPath>
     </Reference>
+    <Reference Include="Sitecore.ContentSearch">
+      <HintPath>..\Binaries\Sitecore.ContentSearch.dll</HintPath>
+    </Reference>
     <Reference Include="Sitecore.Kernel">
       <HintPath>..\Binaries\Sitecore.Kernel.dll</HintPath>
     </Reference>
@@ -63,6 +66,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComputedField\LinkedItems.cs" />
     <Compile Include="Gutters\UnusedItemGutter.cs" />
     <Compile Include="Commands\ShowComponentReferencesCommand.cs" />
     <Compile Include="Helpers\ContentUsageToolsHelper.cs" />

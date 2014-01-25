@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using ContentUsageTools.Pipelines;
 using Sitecore;
 using Sitecore.Configuration;
+using Sitecore.ContentSearch.Utilities;
 using Sitecore.Data.Items;
 using Sitecore.Links;
 using Sitecore.Pipelines;
@@ -25,7 +27,7 @@ namespace ContentUsageTools.Helpers
             referenceItemList.AddRange(
                 links.Select(itemLink => Factory.GetDatabase("master").GetItem(itemLink.SourceItemID)));
 
-           
+
             return referenceItemList;
         }
 
@@ -54,7 +56,22 @@ namespace ContentUsageTools.Helpers
             return !GetLinkedItems(item).Any();
         }
 
-
+        /// <summary>
+        /// Return a list of itemId serparated by a pipe "|" which is linked to the item in parameters
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public static string GetLinkedItemsID(Item item)
+        {
+            var links = Globals.LinkDatabase.GetReferrers(item);
+            var sbId = new StringBuilder();
+            links.ForEach(it => sbId.AppendFormat("{0}|", it.SourceItemID));
+            if (sbId.Length > 0)
+            {
+                sbId.Remove(sbId.Length - 1, 1);
+            }
+            return sbId.ToString();
+        }
 
 
     }
