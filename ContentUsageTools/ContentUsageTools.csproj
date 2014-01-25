@@ -67,7 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\ShowComponentReferencesCommand.cs" />
-    <Compile Include="ComputedField\LinkedItems.cs" />
+    <Compile Include="Fields\Search\LinkedItems.cs" />
     <Compile Include="Gutters\UnusedItemGutter.cs" />
     <Compile Include="Helpers\ContentUsageToolsHelper.cs" />
     <Compile Include="Helpers\ItemEqualityComparer.cs" />
@@ -94,7 +94,9 @@
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Fields\Editor\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\Profile.pubxml" />
   </ItemGroup>
