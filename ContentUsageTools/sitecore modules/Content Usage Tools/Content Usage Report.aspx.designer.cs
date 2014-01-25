@@ -22,6 +22,24 @@ namespace ContentUsageTools.Reports {
         protected global::System.Web.UI.HtmlControls.HtmlForm mainform;
         
         /// <summary>
+        /// UseIndex control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton UseIndex;
+        
+        /// <summary>
+        /// NoIndex control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton NoIndex;
+        
+        /// <summary>
         /// UnusedReport control.
         /// </summary>
         /// <remarks>

@@ -13,6 +13,10 @@
         <div>
             <div>
                 <div>
+                    <asp:RadioButton runat="server" ID="UseIndex" Text="Use the Index for speed search" GroupName="Index"/>
+                    <asp:RadioButton runat="server" ID="NoIndex" Text="Use normal search" GroupName="Index"/>
+                </div>
+                <div>
                     <asp:CheckBox runat="server" ID="UnusedReport" GroupName="report" ValidationGroup="Report" AutoPostBack="True" />
                     <asp:CheckBox runat="server" ID="UsedMultipleTimesReport" GroupName="report" ValidationGroup="Report" AutoPostBack="True" />
                     <asp:CustomValidator runat="server" ID="CvTypeOfReport" OnServerValidate="ValidateTypeOfReport" ValidationGroup="Report" Display="Dynamic"></asp:CustomValidator>

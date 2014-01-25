@@ -63,6 +63,7 @@ namespace ContentUsageTools.Helpers
         /// <returns></returns>
         public static string GetLinkedItemsID(Item item)
         {
+           
             var links = Globals.LinkDatabase.GetReferrers(item);
             var sbId = new StringBuilder();
             links.ForEach(it => sbId.AppendFormat("{0}|", it.SourceItemID));
