@@ -87,21 +87,6 @@
       <ItemDeployment>AlwaysUpdate</ItemDeployment>
       <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
     </SitecoreItem>
-    <SitecoreItem Include="sitecore\content\Applications\WebEdit.item">
-      <Icon>/temp/IconCache/Network/16x16/Environment.png</Icon>
-      <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
-      <ItemDeployment>AlwaysUpdate</ItemDeployment>
-    </SitecoreItem>
-    <SitecoreItem Include="sitecore\content\Applications\WebEdit\Default Rendering Buttons.item">
-      <Icon>/temp/IconCache/Applications/16x16/folder.png</Icon>
-      <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
-      <ItemDeployment>AlwaysUpdate</ItemDeployment>
-    </SitecoreItem>
-    <SitecoreItem Include="sitecore\content\Applications\WebEdit\Default Rendering Buttons\Duplicate and relink.item">
-      <Icon>/temp/IconCache/Applications/32x32/documents_new.png</Icon>
-      <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
-      <ItemDeployment>AlwaysUpdate</ItemDeployment>
-    </SitecoreItem>
     <SitecoreItem Include="sitecore\content\Documents and settings.item">
       <Icon>/temp/IconCache/Applications/16x16/documents_gear.png</Icon>
       <ItemDeployment>AlwaysUpdate</ItemDeployment>

@@ -66,7 +66,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\DuplicateAndRelinkCommand.cs" />
     <Compile Include="Commands\ShowComponentReferencesCommand.cs" />
     <Compile Include="ComputedField\LinkedItems.cs" />
     <Compile Include="Gutters\UnusedItemGutter.cs" />
