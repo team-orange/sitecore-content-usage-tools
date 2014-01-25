@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web;
-using ContentUsageTools.Pipelines;
+﻿using ContentUsageTools.Pipelines;
 using Sitecore;
 using Sitecore.Configuration;
 using Sitecore.ContentSearch.Utilities;
 using Sitecore.Data.Items;
-using Sitecore.Links;
 using Sitecore.Pipelines;
-using Sitecore.Sites;
 using Sitecore.Web;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace ContentUsageTools.Helpers
 {
@@ -68,6 +65,7 @@ namespace ContentUsageTools.Helpers
             SiteInfo siteInfo = Factory.GetSiteInfoList().Where(info => itemPath.StartsWith(info.RootPath + info.StartItem, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
             return siteInfo;
         }
+
         /// <summary>
         /// Return a list of itemId serparated by a pipe "|" which is linked to the item in parameters
         /// </summary>
@@ -84,7 +82,5 @@ namespace ContentUsageTools.Helpers
             }
             return sbId.ToString();
         }
-
-
     }
 }
