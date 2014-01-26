@@ -15,7 +15,7 @@ along with this program. If not, see http://www.gnu.org/licenses/. */
 
 namespace ContentUsageTools.Reports
 {
-    using ContentUsageTools.Helpers;
+    using ContentUsageTools.Common.Helpers;
     using Sitecore.ContentSearch;
     using Sitecore.ContentSearch.SearchTypes;
     using Sitecore.Data.Items;

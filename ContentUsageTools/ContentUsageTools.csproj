@@ -76,9 +76,9 @@
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Fields\Search\LinkedItems.cs" />
     <Compile Include="Gutters\UnusedItemGutter.cs" />
-    <Compile Include="Helpers\ConfigurationHelper.cs" />
-    <Compile Include="Helpers\ContentUsageToolsHelper.cs" />
-    <Compile Include="Helpers\ItemEqualityComparer.cs" />
+    <Compile Include="Common\Helpers\ConfigurationHelper.cs" />
+    <Compile Include="Common\Helpers\ContentUsageToolsHelper.cs" />
+    <Compile Include="Common\Helpers\ItemEqualityComparer.cs" />
     <Compile Include="PageExtenders\MvcContentUsageToolsPageExtender.cs" />
     <Compile Include="sitecore modules\Content Usage Tools\Content Usage Report.aspx.cs">
       <DependentUpon>Content Usage Report.aspx</DependentUpon>

@@ -15,7 +15,7 @@ along with this program. If not, see http://www.gnu.org/licenses/. */
 
 namespace ContentUsageTools.Commands
 {
-    using ContentUsageTools.Helpers;
+    using ContentUsageTools.Common.Helpers;
     using Sitecore.Collections;
     using Sitecore.Data;
     using Sitecore.Data.Items;

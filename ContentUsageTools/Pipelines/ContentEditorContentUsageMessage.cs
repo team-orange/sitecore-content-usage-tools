@@ -15,7 +15,7 @@ along with this program. If not, see http://www.gnu.org/licenses/. */
 
 namespace ContentUsageTools.Pipelines
 {
-    using ContentUsageTools.Helpers;
+    using ContentUsageTools.Common.Helpers;
     using Sitecore.Data.Items;
     using Sitecore.Diagnostics;
     using Sitecore.Globalization;

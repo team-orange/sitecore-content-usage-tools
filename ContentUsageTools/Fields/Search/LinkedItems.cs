@@ -15,7 +15,7 @@ along with this program. If not, see http://www.gnu.org/licenses/. */
 
 namespace ContentUsageTools.Fields.Search
 {
-    using ContentUsageTools.Helpers;
+    using ContentUsageTools.Common.Helpers;
     using Sitecore.ContentSearch;
     using Sitecore.ContentSearch.ComputedFields;
     using Sitecore.Data.Items;
