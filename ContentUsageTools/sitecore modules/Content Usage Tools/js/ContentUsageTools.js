@@ -88,8 +88,9 @@ function showComponentReferences(datasourceItemId, data) {
 
                 var addedComp = document.getElementById(compId);
 
-                addedComp.style.position = 'fixed';
-                addedComp.style.bottom = '0px';
+                // align this on the right
+                addedComp.style.left = (document.body.clientWidth - addedComp.clientWidth) + 'px';
+                addedComp.style.top = (document.body.clientHeight - addedComp.clientHeight) + 'px';
                 addedComp.focus();
 
                 break;
