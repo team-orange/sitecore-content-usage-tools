@@ -82,7 +82,7 @@
                                             <ul class="list-unstyled">
                                         </HeaderTemplate>
                                         <ItemTemplate>
-                                            <li><a target="_blank" href="<%# ContentUsageTools.Helpers.ContentUsageToolsHelper.GetResolvedPageUrl((Item) Container.DataItem) %>"><%# ((Item) Container.DataItem).Paths.ContentPath %></a></li>
+                                            <li><a target="_blank" href="<%# ContentUsageTools.Common.Helpers.ContentUsageToolsHelper.GetResolvedPageUrl((Item) Container.DataItem) %>"><%# ((Item) Container.DataItem).Paths.ContentPath %></a></li>
                                         </ItemTemplate>
                                         <FooterTemplate></ul></FooterTemplate>
                                     </asp:Repeater>
