@@ -85,7 +85,7 @@ namespace ContentUsageTools.Reports
 
                         using (IProviderSearchContext context = ContentSearchManager.GetIndex("sitecore_master_index").CreateSearchContext())
                         {
-                            foreach (SearchResultItem source in context.GetQueryable<SearchResultItem>().Where(x => x.Paths.Contains(this.Item.ID)))
+                            foreach (SearchResultItem source in context.GetQueryable<SearchResultItem>().Where(x => x.Paths.Contains(this.Item.ID) ))
                             {
                                 foreach (string linkedItem in source["LinkedItems"].Split('|').Where(x => !String.IsNullOrEmpty(x)))
                                 {
@@ -157,7 +157,7 @@ namespace ContentUsageTools.Reports
                 if (this.reportItems == null)
                 {
                     Item root = this.RootItem;
-                    this.reportItems = root.Axes.GetDescendants().Where(item => !ContentUsageToolsHelper.IsPage(item));
+                    this.reportItems = root.Axes.GetDescendants().Where(item => !ContentUsageToolsHelper.IsPage(item) && !item.Fields.All(f => f.Name.StartsWith("_")) );
                 }
 
                 return this.reportItems;
